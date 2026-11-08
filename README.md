@@ -18,18 +18,18 @@ Bilingual (PT-BR / EN) professional portfolio of Mateus de Jesus Santos, a Full 
 
 ## Commands
 
-| Command                  | What it does                                                       |
-| ------------------------ | ------------------------------------------------------------------ |
-| `npm ci`                 | Install exact dependencies from the lockfile                       |
-| `npm start`              | Dev server at <http://localhost:4200>                              |
-| `npm run build`          | Production build + prerender into `dist/portfolio/browser`         |
-| `npm run lint`           | ESLint (TypeScript and templates)                                  |
-| `npm test`               | Unit tests in watch mode                                           |
-| `npm run test:ci`        | Unit tests, single run                                             |
-| `npm run format`         | Format everything with Prettier                                    |
-| `npm run format:check`   | Check formatting without writing                                   |
-| `npm run audit`          | `npm audit` for high severity and above                            |
-| `npm run check:contrast` | WCAG 2.2 AA contrast check of every design-token pair, both themes |
+| Command                  | What it does                                                                                       |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
+| `npm ci`                 | Install exact dependencies from the lockfile                                                       |
+| `npm start`              | Dev server at <http://localhost:4200>                                                              |
+| `npm run build`          | Generates sitemap/robots, builds + prerenders into `dist/portfolio/browser`, injects font preloads |
+| `npm run lint`           | ESLint (TypeScript and templates)                                                                  |
+| `npm test`               | Unit tests in watch mode                                                                           |
+| `npm run test:ci`        | Unit tests, single run                                                                             |
+| `npm run format`         | Format everything with Prettier                                                                    |
+| `npm run format:check`   | Check formatting without writing                                                                   |
+| `npm run audit`          | `npm audit` for high severity and above                                                            |
+| `npm run check:contrast` | WCAG 2.2 AA contrast check of every design-token pair, both themes                                 |
 
 The design-system showcase is available at `/design-system` while running `npm start`. It is removed from production builds.
 
@@ -56,7 +56,7 @@ The site is served at `/pt` (pt-BR) and `/en`, both prerendered. `/` redirects t
 - [x] Stage 3: i18n
 - [x] Stage 4: sections and content
 - [x] Stage 5: animations
-- [ ] Stage 6: accessibility, SEO and performance
+- [x] Stage 6: accessibility, SEO and performance
 - [ ] Stage 7: security, CI and deploy
 - [ ] Stage 8: final review
 
