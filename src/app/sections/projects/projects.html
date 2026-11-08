@@ -1,4 +1,8 @@
-<app-section sectionId="projects" [heading]="projects().heading">
+<app-section
+  sectionId="projects"
+  [heading]="projects().heading"
+  [accent]="projects().headingAccent"
+>
   <h3 class="subheading">{{ projects().worked.heading }}</h3>
   <p class="note">{{ projects().worked.note }}</p>
   <ul class="systems">

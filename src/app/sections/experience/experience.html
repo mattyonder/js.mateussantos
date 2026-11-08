@@ -1,4 +1,9 @@
-<app-section sectionId="experience" [heading]="experience().heading" subtle>
+<app-section
+  sectionId="experience"
+  [heading]="experience().heading"
+  [accent]="experience().headingAccent"
+  subtle
+>
   <ol class="timeline">
     @for (position of experience().positions; track position.period) {
       <li class="entry" [class.current]="position.current" [appReveal]="$index * 120">
@@ -8,6 +13,13 @@
             <span class="company">{{ position.company }}</span>
             <span class="period">{{ position.period }}</span>
           </p>
+          <ul class="stack" [attr.aria-label]="experience().stackLabel">
+            @for (tech of position.stack; track tech) {
+              <li>
+                <app-tag tone="neutral">{{ tech }}</app-tag>
+              </li>
+            }
+          </ul>
           <ul class="highlights">
             @for (highlight of position.highlights; track highlight) {
               <li>{{ highlight }}</li>

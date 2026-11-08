@@ -34,6 +34,15 @@ describe.each(LOCALES)('Home page (%s)', (locale) => {
     });
   });
 
+  it('shows the numbers strip right after the hero, as its own labelled region', () => {
+    const main = page().querySelector('main') as HTMLElement;
+    const children = Array.from(main.children).map((child) => child.tagName.toLowerCase());
+    expect(children.slice(0, 2)).toEqual(['app-hero', 'app-stats']);
+    expect(main.querySelector('app-stats section')?.getAttribute('aria-label')).toBe(
+      content.stats.label,
+    );
+  });
+
   it('has the landmarks: header, nav, one main and a footer', () => {
     const el = page();
     expect(el.querySelectorAll('header').length).toBeGreaterThanOrEqual(1);

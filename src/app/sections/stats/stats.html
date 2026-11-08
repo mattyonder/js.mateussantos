@@ -1,0 +1,12 @@
+<section class="stats" [attr.aria-label]="label()">
+  <div class="container">
+    <ul class="strip" appReveal>
+      @for (item of items(); track item.id) {
+        <li class="item">
+          <span class="value">{{ item.value }}</span>
+          <span class="caption">{{ item.caption }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

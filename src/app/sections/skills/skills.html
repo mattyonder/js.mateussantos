@@ -1,4 +1,9 @@
-<app-section sectionId="skills" [heading]="skills().heading" subtle>
+<app-section
+  sectionId="skills"
+  [heading]="skills().heading"
+  [accent]="skills().headingAccent"
+  subtle
+>
   <div class="groups">
     @for (group of skills().groups; track group.id) {
       <app-card [appReveal]="($index % 2) * 100">

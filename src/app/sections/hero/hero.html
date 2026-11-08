@@ -5,7 +5,7 @@
         <app-icon name="map-pin" />
         <span>{{ hero().location }}</span>
       </p>
-      <h1 id="hero-title">{{ hero().name }}</h1>
+      <h1 id="hero-title"><app-accent-text [text]="hero().name" [accent]="hero().nameAccent" /></h1>
       <p class="role">{{ hero().role }}</p>
       <p class="tagline">{{ hero().tagline }}</p>
 

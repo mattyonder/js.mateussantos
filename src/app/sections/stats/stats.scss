@@ -1,0 +1,73 @@
+@use '../../../styles/breakpoints' as bp;
+
+:host {
+  display: block;
+}
+
+.stats {
+  padding-bottom: var(--space-12);
+
+  @include bp.up(md) {
+    padding-bottom: var(--space-16);
+  }
+}
+
+// One rounded card; the items are separated by hairlines. 2x2 on phones, one row from `md`.
+.strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  list-style: none;
+
+  @include bp.up(md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.item {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  // Hairlines between items: right and bottom edges, trimmed again below.
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+
+  &:nth-child(2n) {
+    border-right: 0;
+  }
+  &:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  @include bp.up(md) {
+    padding: var(--space-6);
+    border-bottom: 0;
+
+    &:nth-child(2n) {
+      border-right: 1px solid var(--color-border);
+    }
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.value {
+  color: var(--color-link);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-extrabold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.caption {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}

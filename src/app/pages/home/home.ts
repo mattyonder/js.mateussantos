@@ -9,6 +9,7 @@ import { Experience } from '../../sections/experience/experience';
 import { Hero } from '../../sections/hero/hero';
 import { Projects } from '../../sections/projects/projects';
 import { Skills } from '../../sections/skills/skills';
+import { Stats } from '../../sections/stats/stats';
 
 /**
  * The single page, served at `/pt` and `/en`. The router reuses this component
@@ -21,6 +22,7 @@ import { Skills } from '../../sections/skills/skills';
     SkipLink,
     Header,
     Hero,
+    Stats,
     About,
     Experience,
     Projects,

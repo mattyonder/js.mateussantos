@@ -64,6 +64,14 @@ h3 {
   color: var(--color-text-muted);
 }
 
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
 .highlights {
   display: grid;
   gap: var(--space-3);

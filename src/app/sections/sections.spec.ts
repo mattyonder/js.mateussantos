@@ -60,6 +60,25 @@ describe.each(LOCALES)('content sections (%s)', (locale) => {
       expect(entries.map((e) => e.classList.contains('current'))).toEqual([true, false]);
     });
 
+    it('shows the technologies of each role as a labelled list of chips', () => {
+      const entries = Array.from(
+        root(render(Experience, locale)).querySelectorAll('.timeline > li'),
+      );
+      content.experience.positions.forEach((position, index) => {
+        const list = entries[index].querySelector('ul.stack') as HTMLElement;
+        expect(list.getAttribute('aria-label')).toBe(content.experience.stackLabel);
+        expect(texts(list.querySelectorAll('app-tag'))).toEqual([...position.stack]);
+      });
+    });
+
+    it('Jest appears only on the current role', () => {
+      const lists = Array.from(
+        root(render(Experience, locale)).querySelectorAll('.timeline > li ul.stack'),
+      ).map((list) => texts(list.querySelectorAll('app-tag')));
+      expect(lists[0]).toContain('Jest');
+      expect(lists[1]).not.toContain('Jest');
+    });
+
     it('highlights only the current role with the featured card', () => {
       const variants = Array.from(
         root(render(Experience, locale)).querySelectorAll('.timeline app-card'),

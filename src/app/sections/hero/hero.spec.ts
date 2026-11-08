@@ -17,6 +17,12 @@ describe('Hero', () => {
       expect(el.querySelector('.location')?.textContent?.trim()).toBe(content.location);
     });
 
+    it('sets part of the name in the accent italic without changing the h1 text', () => {
+      const h1 = root(render(Hero, locale)).querySelector('h1') as HTMLElement;
+      expect(h1.textContent).toBe(content.name);
+      expect(h1.querySelector('.accent')?.textContent).toBe(content.nameAccent);
+    });
+
     it('lists the key technologies as a labelled list of chips under the tagline', () => {
       const list = root(render(Hero, locale)).querySelector('ul.stack') as HTMLElement;
       expect(list.getAttribute('aria-label')).toBe(content.stackLabel);

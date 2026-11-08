@@ -1,4 +1,9 @@
-<app-section sectionId="contact" [heading]="contact().heading" subtle>
+<app-section
+  sectionId="contact"
+  [heading]="contact().heading"
+  [accent]="contact().headingAccent"
+  subtle
+>
   <div class="cta-card" appReveal>
     <div class="copy">
       <p class="intro">{{ contact().intro }}</p>

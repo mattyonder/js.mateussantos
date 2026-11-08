@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { RouterLink } from '@angular/router';
 import { HERO_STACK, PROFILE, RESUME_PATH } from '../../content/profile';
 import { I18nService } from '../../core/i18n/i18n.service';
+import { AccentText } from '../../ui/accent-text/accent-text';
 import { Button } from '../../ui/button/button';
 import { Icon } from '../../ui/icon/icon';
 import { NewTabHint } from '../../ui/new-tab-hint/new-tab-hint';
@@ -14,7 +15,7 @@ import { Tag } from '../../ui/tag/tag';
  */
 @Component({
   selector: 'app-hero',
-  imports: [NgOptimizedImage, RouterLink, Button, Icon, NewTabHint, Tag],
+  imports: [NgOptimizedImage, RouterLink, AccentText, Button, Icon, NewTabHint, Tag],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

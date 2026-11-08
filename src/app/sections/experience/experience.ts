@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { I18nService } from '../../core/i18n/i18n.service';
 import { Card } from '../../ui/card/card';
 import { Section } from '../../ui/section/section';
+import { Tag } from '../../ui/tag/tag';
 import { Reveal } from '../../ui/reveal/reveal';
 
 /** Timeline of positions, most recent first (the order of the content file). */
 @Component({
   selector: 'app-experience',
-  imports: [Section, Card, Reveal],
+  imports: [Section, Card, Reveal, Tag],
   templateUrl: './experience.html',
   styleUrl: './experience.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
