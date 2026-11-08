@@ -27,3 +27,47 @@ $latin-range:
     format('woff2-variations');
   unicode-range: $latin-range;
 }
+
+// ---- Metric-adjusted fallbacks (prevents layout shift when the web font swaps in) ----
+// Until the web font arrives the browser draws text with a fallback. If that fallback is
+// wider/taller, lines re-wrap and everything below jumps when the real font loads (this
+// measured CLS 0.117 on mobile, all from the hero photo moving). These faces make Arial
+// occupy the same space as Inter / Plus Jakarta Sans:
+//   size-adjust       = web font average advance / Arial average advance, weighted by the
+//                       site's real text (PT + EN content), computed with fontTools
+//   ascent/descent    = the web font's hhea metrics divided by size-adjust
+//   line-gap-override = 0 (both web fonts have none)
+// Only Arial is targeted (metrics are tuned to it); where `local('Arial')` does not exist
+// (some Linux/Android) the browser skips the face and uses the next family in the stack.
+@font-face {
+  font-family: 'Inter Fallback';
+  font-style: normal;
+  font-weight: 100 599;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 106.44%;
+  ascent-override: 91.01%;
+  descent-override: 22.66%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  font-style: normal;
+  font-weight: 600 900;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 101.14%;
+  ascent-override: 95.78%;
+  descent-override: 23.85%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans Fallback';
+  font-style: normal;
+  font-weight: 100 900;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 100.7%;
+  ascent-override: 103.1%;
+  descent-override: 22.05%;
+  line-gap-override: 0%;
+}

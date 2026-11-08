@@ -83,10 +83,11 @@
   color-scheme: light;
 
   // ---- Typography ----
-  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body:
+    'Inter Variable', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-display:
-    'Plus Jakarta Sans Variable', 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
-    sans-serif;
+    'Plus Jakarta Sans Variable', 'Plus Jakarta Sans Fallback', 'Inter Variable', 'Inter Fallback',
+    system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.8125rem;
@@ -142,6 +143,11 @@
   --container-max: 72rem;
   --gutter: clamp(1rem, 4vw, 2rem);
   --header-height: 4rem; // used for scroll-padding so anchors are not obscured (WCAG 2.2 SC 2.4.11)
+
+  // ---- Effects ----
+  // Strength of the purple glow behind the hero. check:contrast measures text against the
+  // glow's PEAK (this percentage of --color-primary over --color-bg), the worst case.
+  --hero-glow: 16%;
 
   // ---- Motion ----
   --duration-fast: 150ms;

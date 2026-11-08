@@ -16,6 +16,9 @@ const TOKENS = fileURLToPath(new URL('../src/styles/_tokens.scss', import.meta.u
 const TEXT = 4.5;
 const UI = 3;
 
+/** Background of the hero at the glow's strongest point: --hero-glow of --color-primary over --color-bg. */
+const HERO_GLOW = { glow: true };
+
 /** [foreground token, background token, minimum ratio, what it protects] */
 const PAIRS = [
   ['--color-text', '--color-bg', TEXT, 'body text on page'],
@@ -41,6 +44,12 @@ const PAIRS = [
   ['--color-success', '--color-success-bg', TEXT, 'success state'],
   ['--color-warning', '--color-warning-bg', TEXT, 'warning state'],
   ['--color-danger', '--color-danger-bg', TEXT, 'danger state'],
+  // Hero text sits on a radial glow, which automated tools cannot evaluate: check the peak.
+  ['--color-text', HERO_GLOW, TEXT, 'hero title on the glow peak'],
+  ['--color-text-muted', HERO_GLOW, TEXT, 'hero location/tagline on the glow peak'],
+  ['--color-link', HERO_GLOW, TEXT, 'hero role + secondary button on the glow peak'],
+  ['--color-link-hover', HERO_GLOW, TEXT, 'hero link hover on the glow peak'],
+  ['--color-focus-ring', HERO_GLOW, UI, 'focus ring on the glow peak'],
   ['--color-focus-ring', '--color-bg', UI, 'focus ring on page'],
   ['--color-focus-ring', '--color-surface', UI, 'focus ring on card'],
   ['--color-focus-ring', '--color-surface-raised', UI, 'focus ring on raised surface'],
@@ -71,6 +80,14 @@ function resolve(name, vars, seen = new Set()) {
     throw new Error(`Token ${name} is not a 6-digit hex colour: "${raw}"`);
   }
   return raw;
+}
+
+/** Alpha-composites `fg` at `percent`% over `bg` (what `color-mix(in srgb, fg P%, transparent)` over bg paints). */
+function overlay(fg, bg, percent) {
+  const a = percent / 100;
+  const ch = (i) =>
+    Math.round(parseInt(fg.slice(i, i + 2), 16) * a + parseInt(bg.slice(i, i + 2), 16) * (1 - a));
+  return `#${[1, 3, 5].map((i) => ch(i).toString(16).padStart(2, '0')).join('')}`;
 }
 
 function luminance(hex) {
@@ -104,12 +121,19 @@ for (const [themeName, vars] of Object.entries(themes)) {
   console.log(`\n== ${themeName} ==`);
   for (const [fgToken, bgToken, min, what] of PAIRS) {
     const fg = resolve(fgToken, vars);
-    const bg = resolve(bgToken, vars);
+    const bg =
+      bgToken === HERO_GLOW
+        ? overlay(
+            resolve('--color-primary', vars),
+            resolve('--color-bg', vars),
+            parseFloat(vars['--hero-glow']),
+          )
+        : resolve(bgToken, vars);
     const value = ratio(fg, bg);
     const ok = value >= min;
     if (!ok) failures++;
     console.log(
-      `${ok ? 'PASS' : 'FAIL'}  ${value.toFixed(2).padStart(5)}:1 (min ${min})  ${what}  [${fgToken} ${fg} on ${bgToken} ${bg}]`,
+      `${ok ? 'PASS' : 'FAIL'}  ${value.toFixed(2).padStart(5)}:1 (min ${min})  ${what}  [${fgToken} ${fg} on ${bgToken === HERO_GLOW ? 'hero glow peak' : bgToken} ${bg}]`,
     );
   }
 }

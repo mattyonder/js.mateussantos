@@ -8,7 +8,7 @@
   padding-block: var(--space-12) var(--space-16);
   background: radial-gradient(
     60rem 28rem at 85% -10%,
-    color-mix(in srgb, var(--color-primary) 16%, transparent),
+    color-mix(in srgb, var(--color-primary) var(--hero-glow), transparent),
     transparent 70%
   );
 
@@ -58,11 +58,22 @@
   font-size: var(--text-lg);
 }
 
+// Phones: the two buttons are STACKED, full width. Side by side they fit a 412px screen by
+// only ~10px, so when the web font replaced the fallback (a few px wider) the second button
+// wrapped, the block grew by 64px and the photo below jumped (CLS 0.12, reproduced under a
+// slow CPU). A layout that is always one-per-row cannot change shape on a font swap.
 .actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-3);
+  width: 100%;
   margin-top: var(--space-4);
+
+  @include bp.up(sm) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+  }
 }
 
 .profiles {
