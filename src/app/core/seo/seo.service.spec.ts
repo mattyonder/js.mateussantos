@@ -3,7 +3,7 @@ import { CONTENT } from '../../content';
 import { PROFILE } from '../../content/profile';
 import { LOCALES, type Locale } from '../i18n/locales';
 import { buildPersonJsonLd, serializeJsonLd } from './person-jsonld';
-import { SeoService } from './seo.service';
+import { JSON_LD_POLICY_NAME, SeoService } from './seo.service';
 
 describe('SeoService: social tags and structured data', () => {
   const head = document.head;
@@ -146,6 +146,59 @@ describe('SeoService: social tags and structured data', () => {
       TestBed.inject(SeoService).markNoIndex();
       update('pt');
       expect(head.querySelector('meta[name="robots"]')).toBeNull();
+    });
+  });
+  describe('Trusted Types (enforced by the CSP)', () => {
+    interface Rules {
+      createScript(input: string): string;
+    }
+
+    const ours = (createPolicy: { mock: { calls: [string, Rules][] } }) =>
+      createPolicy.mock.calls.filter(([name]) => name === JSON_LD_POLICY_NAME);
+
+    function stubTrustedTypes(failCreate = false) {
+      const createPolicy = vi.fn((_name: string, rules: Rules) => {
+        if (failCreate) throw new Error('policy name not allowed');
+        return { createScript: (input: string) => rules.createScript(input) };
+      });
+      Object.defineProperty(window, 'trustedTypes', {
+        configurable: true,
+        value: { createPolicy },
+      });
+      return createPolicy;
+    }
+
+    afterEach(() => Reflect.deleteProperty(window, 'trustedTypes'));
+
+    it('creates ONE policy with the name the CSP allows, and reuses it', () => {
+      const createPolicy = stubTrustedTypes();
+      update('pt');
+      update('en');
+      update('pt');
+      expect(JSON_LD_POLICY_NAME).toBe('ng-portifolio-jsonld');
+      // Angular registers its own 'angular' policy on the same factory: count only ours.
+      expect(ours(createPolicy).length).toBe(1);
+      expect(jsonLd()['@type']).toBe('Person');
+    });
+
+    it('the policy only lets valid JSON through', () => {
+      const createPolicy = stubTrustedTypes();
+      update('pt');
+      const rules = ours(createPolicy)[0][1];
+      expect(() => rules.createScript('{"a": 1}')).not.toThrow();
+      expect(() => rules.createScript('alert(1)')).toThrow();
+      expect(() => rules.createScript('</script><script>alert(1)</script>')).toThrow();
+    });
+
+    it('falls back to the plain string if the browser refuses the policy', () => {
+      stubTrustedTypes(true);
+      expect(() => update('pt')).not.toThrow();
+      expect(jsonLd()['@type']).toBe('Person');
+    });
+
+    it('works with no Trusted Types at all (older browsers, prerender)', () => {
+      expect(() => update('pt')).not.toThrow();
+      expect(jsonLd()['name']).toBe(PROFILE.name);
     });
   });
 });

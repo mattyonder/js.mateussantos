@@ -11,6 +11,22 @@ export { pageUrl } from './person-jsonld';
 const JSON_LD_ID = 'person-jsonld';
 
 /**
+ * Name of our Trusted Types policy. It must also be listed in the CSP `trusted-types`
+ * directive (scripts/csp.mjs), or the browser refuses to create it.
+ */
+export const JSON_LD_POLICY_NAME = 'ng-portifolio-jsonld';
+
+// Minimal Trusted Types typings (TypeScript's lib.dom does not ship them and a whole
+// `@types/trusted-types` dependency is not worth three interfaces).
+interface ScriptPolicy {
+  createScript(input: string): unknown;
+}
+interface TrustedTypesFactory {
+  createPolicy(name: string, rules: { createScript(input: string): string }): ScriptPolicy;
+}
+type WindowWithTrustedTypes = Window & { trustedTypes?: TrustedTypesFactory };
+
+/**
  * Keeps the head tags that depend on the language in sync: title, description,
  * canonical, `hreflang` alternates (including `x-default`), Open Graph, Twitter
  * Card and the schema.org `Person` JSON-LD. It runs during prerender, so all of
@@ -21,6 +37,7 @@ export class SeoService {
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly document = inject(DOCUMENT);
+  private jsonLdPolicy: ScriptPolicy | null | undefined;
 
   update(locale: Locale, page: PageMeta): void {
     this.title.setTitle(page.title);
@@ -90,7 +107,34 @@ export class SeoService {
       script.setAttribute('id', JSON_LD_ID);
       head.appendChild(script);
     }
-    script.textContent = serializeJsonLd(buildPersonJsonLd(locale));
+    const json = serializeJsonLd(buildPersonJsonLd(locale));
+    // With `require-trusted-types-for 'script'` the browser rejects plain strings for a script's
+    // text (a classic DOM-XSS sink); it needs a TrustedScript from an allowed policy.
+    // Browsers without Trusted Types (and the prerender) just take the string.
+    const policy = this.getJsonLdPolicy();
+    script.textContent = (policy ? policy.createScript(json) : json) as string;
+  }
+
+  /**
+   * The policy only lets through text that is valid JSON, so even a bug upstream could not
+   * turn it into executable script text through this one allowed door.
+   */
+  private getJsonLdPolicy(): ScriptPolicy | null {
+    if (this.jsonLdPolicy === undefined) {
+      const factory = (this.document.defaultView as WindowWithTrustedTypes | null)?.trustedTypes;
+      try {
+        this.jsonLdPolicy =
+          factory?.createPolicy(JSON_LD_POLICY_NAME, {
+            createScript: (input: string) => {
+              JSON.parse(input); // throws on anything that is not JSON
+              return input;
+            },
+          }) ?? null;
+      } catch {
+        this.jsonLdPolicy = null; // policy name blocked or already taken: fall back to the string
+      }
+    }
+    return this.jsonLdPolicy;
   }
 
   private setLink(rel: 'canonical' | 'alternate', href: string, hreflang?: string): void {
