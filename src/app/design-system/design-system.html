@@ -1,0 +1,84 @@
+<main>
+  <div class="container toolbar">
+    <h1>Design system</h1>
+    <app-theme-toggle label="Dark theme" />
+  </div>
+
+  <app-section sectionId="colors" heading="Colors" eyebrow="Tokens">
+    <h3>Purple</h3>
+    <ul class="swatches">
+      @for (token of purple; track token) {
+        <li>
+          <span class="chip" [style.background]="'var(' + token + ')'"></span>
+          <code>{{ token }}</code>
+        </li>
+      }
+    </ul>
+    <h3>Neutral</h3>
+    <ul class="swatches">
+      @for (token of neutral; track token) {
+        <li>
+          <span class="chip" [style.background]="'var(' + token + ')'"></span>
+          <code>{{ token }}</code>
+        </li>
+      }
+    </ul>
+    <h3>Semantic</h3>
+    <ul class="swatches">
+      @for (token of semantic; track token) {
+        <li>
+          <span class="chip" [style.background]="'var(' + token + ')'"></span>
+          <code>{{ token }}</code>
+        </li>
+      }
+    </ul>
+  </app-section>
+
+  <app-section sectionId="type" heading="Typography" eyebrow="Tokens">
+    <h1>Heading 1: Full Stack Developer</h1>
+    <h2>Heading 2: Experience</h2>
+    <h3>Heading 3: Mid-level developer</h3>
+    <h4>Heading 4: Skills</h4>
+    <p>
+      Body text in Inter. Portuguese accents render correctly: ação, coração, você, atenção,
+      Sergipe.
+      <a href="#type">An inline link</a> follows the same contrast rules.
+    </p>
+    <p class="muted">Muted text, used for secondary information such as dates.</p>
+  </app-section>
+
+  <app-section sectionId="buttons" heading="Buttons" eyebrow="Components">
+    <div class="row">
+      <button app-button type="button">Primary</button>
+      <button app-button variant="secondary" type="button">Secondary</button>
+      <button app-button variant="ghost" type="button">Ghost</button>
+      <button app-button type="button" disabled>Disabled</button>
+    </div>
+    <div class="row">
+      <a app-button size="lg" href="#buttons">Large link button</a>
+      <a app-button size="lg" variant="secondary" href="#buttons">Large secondary</a>
+    </div>
+  </app-section>
+
+  <app-section sectionId="cards" heading="Cards and tags" eyebrow="Components">
+    <div class="grid">
+      <app-card>
+        <h3>Default card</h3>
+        <p class="muted">Surface, border and soft shadow.</p>
+        <div class="row">
+          <app-tag>Angular</app-tag>
+          <app-tag>TypeScript</app-tag>
+          <app-tag tone="neutral">Neutral</app-tag>
+        </div>
+      </app-card>
+      <app-card interactive>
+        <h3>Interactive card</h3>
+        <p class="muted">Hover to see the affordance.</p>
+      </app-card>
+      <app-card variant="placeholder">
+        <h3>Placeholder card</h3>
+        <p class="muted">Dashed border for slots that are not filled yet.</p>
+      </app-card>
+    </div>
+  </app-section>
+</main>
