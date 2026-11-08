@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, afterNextRender, inject } from '@an
 import { Router, RouterLink } from '@angular/router';
 import { PROFILE } from '../../content/profile';
 import { LanguagePreference } from '../../core/i18n/language-preference';
+import { SeoService } from '../../core/seo/seo.service';
 import { LOCALES, LOCALE_INFO } from '../../core/i18n/locales';
 
 /**
@@ -27,6 +28,9 @@ export class RootRedirect {
 
   constructor() {
     inject(Title).setTitle(PROFILE.name);
+    // The chooser is not content: keep it out of search results but let crawlers follow
+    // its links to /pt and /en.
+    inject(SeoService).markNoIndex({ follow: true });
     afterNextRender(() => {
       void this.router.navigate(['/', this.preference.detect()], { replaceUrl: true });
     });

@@ -12,6 +12,8 @@ export type SectionId = 'about' | 'experience' | 'projects' | 'skills' | 'educat
 export interface PageMeta {
   readonly title: string;
   readonly description: string;
+  /** Alt text of the Open Graph / Twitter share image. */
+  readonly imageAlt: string;
 }
 
 export interface NavItem {

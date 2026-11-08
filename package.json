@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-seo-files.mjs && ng build && node scripts/inject-font-preloads.mjs",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "check:contrast": "node scripts/check-contrast.mjs",

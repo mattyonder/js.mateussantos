@@ -7,6 +7,8 @@ export const PT: SiteContent = {
     title: 'Mateus de Jesus Santos | Desenvolvedor Full Stack Pleno (Angular)',
     description:
       'Portfólio de Mateus de Jesus Santos, desenvolvedor Full Stack Pleno com foco em front-end Angular e TypeScript e experiência em Java e Spring Boot.',
+    imageAlt:
+      'Cartão de apresentação de Mateus de Jesus Santos: foto, nome e "Full Stack · Angular" sobre fundo roxo',
   },
   a11y: {
     skipToContent: 'Pular para o conteúdo',

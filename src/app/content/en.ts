@@ -14,6 +14,8 @@ export const EN: SiteContent = {
     title: 'Mateus de Jesus Santos | Mid-Level Full Stack Developer (Angular)',
     description:
       'Portfolio of Mateus de Jesus Santos, a mid-level Full Stack developer specialized in Angular and TypeScript front-end, with Java and Spring Boot experience.',
+    imageAlt:
+      'Introduction card for Mateus de Jesus Santos: photo, name and "Full Stack · Angular" on a purple background',
   },
   a11y: {
     skipToContent: 'Skip to content',

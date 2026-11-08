@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Lets the browser render native UI (scrollbars, form controls) in the right scheme. -->
     <meta name="color-scheme" content="light dark" />
+    <!-- Browser UI colour (mobile address bar). Same values as --color-bg in each theme (_tokens.scss). -->
+    <meta name="theme-color" content="#faf9fc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12101a" media="(prefers-color-scheme: dark)" />
     <!--
       No-flash theme bootstrap. Runs synchronously before first paint so the page
       never renders in the wrong theme. Keep the storage key ('theme') in sync with

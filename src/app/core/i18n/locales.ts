@@ -15,11 +15,13 @@ export interface LocaleInfo {
   readonly hreflang: string;
   /** The language's own name (endonym). Deliberately NOT translated. */
   readonly name: string;
+  /** Open Graph locale (`language_TERRITORY`). */
+  readonly ogLocale: string;
 }
 
 export const LOCALE_INFO: Readonly<Record<Locale, LocaleInfo>> = {
-  pt: { code: 'pt', htmlLang: 'pt-BR', hreflang: 'pt-BR', name: 'Português' },
-  en: { code: 'en', htmlLang: 'en', hreflang: 'en', name: 'English' },
+  pt: { code: 'pt', htmlLang: 'pt-BR', hreflang: 'pt-BR', name: 'Português', ogLocale: 'pt_BR' },
+  en: { code: 'en', htmlLang: 'en', hreflang: 'en', name: 'English', ogLocale: 'en_US' },
 };
 
 export function isLocale(value: unknown): value is Locale {
