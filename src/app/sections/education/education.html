@@ -1,6 +1,6 @@
 <app-section sectionId="education" [heading]="education().heading">
   <div class="columns">
-    <div>
+    <div appReveal>
       <h3>{{ education().degreesHeading }}</h3>
       <ul class="degrees">
         @for (degree of education().degrees; track degree.title) {
@@ -12,7 +12,7 @@
         }
       </ul>
     </div>
-    <div>
+    <div [appReveal]="100">
       <h3>{{ education().languagesHeading }}</h3>
       <dl class="languages">
         @for (language of education().languages; track language.name) {

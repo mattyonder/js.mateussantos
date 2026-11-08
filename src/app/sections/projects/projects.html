@@ -3,7 +3,7 @@
   <p class="note">{{ projects().worked.note }}</p>
   <ul class="systems">
     @for (system of projects().worked.systems; track system.id) {
-      <li>
+      <li [appReveal]="($index % 2) * 100">
         <app-card>
           <h4>{{ system.name }}</h4>
           <dl>
@@ -28,7 +28,7 @@
   <h3 class="subheading personal">{{ projects().personal.heading }}</h3>
   <ul class="personal-grid">
     @for (item of projects().personal.items; track $index) {
-      <li>
+      <li [appReveal]="$index * 100">
         <app-personal-project
           [project]="item"
           [comingSoonLabel]="projects().personal.comingSoonLabel"

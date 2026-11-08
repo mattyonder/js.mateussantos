@@ -5,6 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { Reveal } from '../reveal/reveal';
 
 /**
  * Page section with a heading. Renders a landmark `<section>` labelled by its
@@ -14,6 +15,7 @@ import {
  */
 @Component({
   selector: 'app-section',
+  imports: [Reveal],
   templateUrl: './section.html',
   styleUrl: './section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

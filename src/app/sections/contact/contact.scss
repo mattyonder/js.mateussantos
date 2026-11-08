@@ -33,12 +33,14 @@
   text-decoration: none;
   transition:
     border-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 
   &:hover {
     border-color: var(--color-link);
     box-shadow: var(--shadow-md);
     color: var(--color-text);
+    transform: translateY(-3px);
   }
 
   app-icon {

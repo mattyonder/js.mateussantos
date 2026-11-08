@@ -1,7 +1,7 @@
 <app-section sectionId="skills" [heading]="skills().heading" subtle>
   <div class="groups">
     @for (group of skills().groups; track group.id) {
-      <app-card>
+      <app-card [appReveal]="($index % 2) * 100">
         <h3>{{ group.title }}</h3>
         <ul class="tags">
           @for (item of group.items; track item) {

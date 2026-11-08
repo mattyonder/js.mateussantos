@@ -42,3 +42,16 @@ button {
     display: none;
   }
 }
+
+// Plays only during a theme change: ThemeService puts `theme-transition` on <html>
+// for ~400ms. The icon that has just become visible turns in; at load nothing moves.
+:host-context(.theme-transition) .icon {
+  animation: icon-in var(--duration-base) var(--ease-out);
+}
+
+@keyframes icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-70deg) scale(0.6);
+  }
+}

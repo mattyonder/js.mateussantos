@@ -4,6 +4,7 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { Icon } from '../../ui/icon/icon';
 import { NewTabHint } from '../../ui/new-tab-hint/new-tab-hint';
 import { Section } from '../../ui/section/section';
+import { Reveal } from '../../ui/reveal/reveal';
 
 /**
  * Public contact: e-mail, LinkedIn and GitHub. No form and no phone number.
@@ -12,7 +13,7 @@ import { Section } from '../../ui/section/section';
  */
 @Component({
   selector: 'app-contact',
-  imports: [Section, Icon, NewTabHint],
+  imports: [Section, Icon, NewTabHint, Reveal],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

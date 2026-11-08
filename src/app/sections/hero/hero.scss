@@ -107,3 +107,40 @@
     height: 18rem;
   }
 }
+
+// Entrance: TRANSFORM ONLY, on purpose. The hero text and photo are Largest Contentful
+// Paint candidates; starting them at opacity 0 would delay LCP. (Reduced motion: the
+// global rule in _base.scss shortens every animation to ~0.)
+@keyframes rise {
+  from {
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(0.96);
+  }
+}
+
+.text > * {
+  animation: rise var(--duration-slow) var(--ease-out) backwards;
+}
+
+@for $i from 1 through 6 {
+  .text > :nth-child(#{$i}) {
+    animation-delay: #{($i - 1) * 70}ms;
+  }
+}
+
+.photo {
+  animation: settle calc(var(--duration-slow) * 1.5) var(--ease-out) backwards;
+}
+
+.actions app-icon {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.actions a:hover app-icon {
+  transform: translateY(2px);
+}

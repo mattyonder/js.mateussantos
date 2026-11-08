@@ -3,10 +3,11 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { Card } from '../../ui/card/card';
 import { Section } from '../../ui/section/section';
 import { Tag } from '../../ui/tag/tag';
+import { Reveal } from '../../ui/reveal/reveal';
 
 @Component({
   selector: 'app-skills',
-  imports: [Section, Card, Tag],
+  imports: [Section, Card, Tag, Reveal],
   templateUrl: './skills.html',
   styleUrl: './skills.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

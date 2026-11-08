@@ -1,7 +1,7 @@
 <app-section sectionId="experience" [heading]="experience().heading" subtle>
   <ol class="timeline">
     @for (position of experience().positions; track position.period) {
-      <li class="entry" [class.current]="position.current">
+      <li class="entry" [class.current]="position.current" [appReveal]="$index * 120">
         <app-card>
           <h3>{{ position.role }}</h3>
           <p class="meta">

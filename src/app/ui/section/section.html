@@ -1,6 +1,6 @@
 <section [id]="sectionId()" [attr.aria-labelledby]="headingId()" [class.subtle]="subtle()">
   <div class="container">
-    <header class="header">
+    <header class="header" appReveal>
       @if (eyebrow(); as text) {
         <p class="eyebrow">{{ text }}</p>
       }

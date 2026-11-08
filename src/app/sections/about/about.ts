@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { Section } from '../../ui/section/section';
+import { Reveal } from '../../ui/reveal/reveal';
 
 @Component({
   selector: 'app-about',
-  imports: [Section],
+  imports: [Section, Reveal],
   template: `
     <app-section sectionId="about" [heading]="about().heading">
-      <p class="summary">{{ about().summary }}</p>
+      <p class="summary" appReveal>{{ about().summary }}</p>
     </app-section>
   `,
   styles: `

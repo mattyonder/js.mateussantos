@@ -7,7 +7,8 @@
   box-shadow: var(--shadow-sm);
   transition:
     border-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
 
 :host([data-variant='placeholder']) {
@@ -19,4 +20,5 @@
 :host([data-interactive]:hover) {
   border-color: var(--color-link);
   box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
