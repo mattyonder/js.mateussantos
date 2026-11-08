@@ -1,0 +1,16 @@
+@use 'sass:map';
+
+// Mobile-first breakpoints. Media queries cannot use CSS custom properties,
+// so these live as SCSS variables. Usage: @include bp.up(md) { ... }
+$breakpoints: (
+  sm: 40rem,
+  md: 48rem,
+  lg: 64rem,
+  xl: 80rem,
+);
+
+@mixin up($name) {
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

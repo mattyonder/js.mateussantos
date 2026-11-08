@@ -1,0 +1,198 @@
+// Design tokens.
+//
+// Two layers:
+//   1. Primitives (--purple-*, --neutral-*, ...): raw palette, theme-independent.
+//   2. Semantic (--color-*): what components use. Each theme remaps them to
+//      primitives, so components never reference a raw colour.
+//
+// Contrast of every text/UI pair is verified by `npm run check:contrast`
+// (WCAG 2.2 AA). Run it after changing any colour here.
+
+:root {
+  // ---- Primitives: purple scale (violet hue) ----
+  --purple-50: #f5f3ff;
+  --purple-100: #ede9fe;
+  --purple-200: #ddd6fe;
+  --purple-300: #c4b5fd;
+  --purple-400: #a78bfa;
+  --purple-500: #8b5cf6;
+  --purple-600: #7c3aed;
+  --purple-700: #6d28d9;
+  --purple-800: #5b21b6;
+  --purple-900: #4c1d95;
+  --purple-950: #2e1065;
+
+  // ---- Primitives: neutrals, slightly tinted toward purple ----
+  --neutral-0: #ffffff;
+  --neutral-50: #faf9fc;
+  --neutral-100: #f3f1f7;
+  --neutral-200: #e6e3ee;
+  --neutral-300: #d3cfdf;
+  --neutral-400: #a29cb3;
+  --neutral-500: #756e88;
+  --neutral-600: #5a546b;
+  --neutral-700: #443f54;
+  --neutral-800: #2c2938;
+  --neutral-900: #1c1a26;
+  --neutral-950: #12101a;
+
+  // ---- Primitives: state colours ----
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-800: #166534;
+  --green-950: #052e16;
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-900: #78350f;
+  --amber-950: #451a03;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-800: #991b1b;
+  --red-950: #450a0a;
+
+  // ---- Semantic colours: LIGHT theme (default) ----
+  --color-bg: var(--neutral-50);
+  --color-bg-subtle: var(--neutral-100);
+  --color-surface: var(--neutral-0);
+  --color-surface-raised: var(--neutral-0);
+  --color-text: var(--neutral-900);
+  --color-text-muted: var(--neutral-600);
+  --color-border: var(--neutral-200);
+  --color-border-strong: var(--neutral-500); // UI boundaries: needs 3:1
+  --color-primary: var(--purple-700);
+  --color-primary-hover: var(--purple-800);
+  --color-primary-active: var(--purple-900);
+  --color-primary-subtle: var(--purple-50);
+  --color-text-on-primary: var(--neutral-0);
+  --color-link: var(--purple-700);
+  --color-link-hover: var(--purple-900);
+  --color-focus-ring: var(--purple-600);
+  --color-tag-bg: var(--purple-100);
+  --color-tag-text: var(--purple-900);
+  --color-tag-neutral-bg: var(--neutral-100);
+  --color-tag-neutral-text: var(--neutral-700);
+  --color-success: var(--green-800);
+  --color-success-bg: var(--green-100);
+  --color-warning: var(--amber-900);
+  --color-warning-bg: var(--amber-100);
+  --color-danger: var(--red-800);
+  --color-danger-bg: var(--red-100);
+  --shadow-color: 46 16 101; // RGB channels of purple-950
+  --shadow-alpha: 0.1;
+
+  color-scheme: light;
+
+  // ---- Typography ----
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display:
+    'Plus Jakarta Sans Variable', 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.9vw, 2.75rem);
+  --text-4xl: clamp(2.25rem, 1.6rem + 3.2vw, 3.75rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  // ---- Spacing (4px base) ----
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  // ---- Radii ----
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  // ---- Shadows (tinted by --shadow-color, so they adapt per theme) ----
+  --shadow-sm: 0 1px 2px rgb(var(--shadow-color) / calc(var(--shadow-alpha) * 0.8));
+  --shadow-md:
+    0 4px 12px rgb(var(--shadow-color) / var(--shadow-alpha)),
+    0 1px 3px rgb(var(--shadow-color) / calc(var(--shadow-alpha) * 0.8));
+  --shadow-lg:
+    0 16px 32px rgb(var(--shadow-color) / calc(var(--shadow-alpha) * 1.4)),
+    0 4px 8px rgb(var(--shadow-color) / var(--shadow-alpha));
+
+  // ---- Layout ----
+  --container-max: 72rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 4rem; // used for scroll-padding so anchors are not obscured (WCAG 2.2 SC 2.4.11)
+
+  // ---- Motion ----
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+// ---- Semantic colours: DARK theme ----
+@mixin dark-colors {
+  --color-bg: var(--neutral-950);
+  --color-bg-subtle: var(--neutral-900);
+  --color-surface: var(--neutral-900);
+  --color-surface-raised: var(--neutral-800);
+  --color-text: var(--neutral-50);
+  --color-text-muted: var(--neutral-400);
+  --color-border: var(--neutral-800);
+  --color-border-strong: var(--neutral-500);
+  --color-primary: var(--purple-600);
+  // Hover/active get DARKER (not lighter): the label is white, so lightening
+  // the fill would drop below 4.5:1 (caught by check:contrast).
+  --color-primary-hover: var(--purple-700);
+  --color-primary-active: var(--purple-800);
+  --color-primary-subtle: var(--purple-950);
+  --color-text-on-primary: var(--neutral-0);
+  --color-link: var(--purple-300);
+  --color-link-hover: var(--purple-200);
+  --color-focus-ring: var(--purple-300);
+  --color-tag-bg: var(--purple-900);
+  --color-tag-text: var(--purple-100);
+  --color-tag-neutral-bg: var(--neutral-800);
+  --color-tag-neutral-text: var(--neutral-200);
+  --color-success: var(--green-200);
+  --color-success-bg: var(--green-950);
+  --color-warning: var(--amber-200);
+  --color-warning-bg: var(--amber-950);
+  --color-danger: var(--red-200);
+  --color-danger-bg: var(--red-950);
+  --shadow-color: 0 0 0;
+  --shadow-alpha: 0.45;
+  color-scheme: dark;
+}
+
+// Explicit choice (set by the inline script in index.html and by ThemeService).
+:root[data-theme='dark'] {
+  @include dark-colors;
+}
+
+// No-JS fallback: if the script did not run, follow the OS preference.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include dark-colors;
+  }
+}
