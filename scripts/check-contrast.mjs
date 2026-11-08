@@ -34,6 +34,21 @@ const PAIRS = [
   ['--color-link', '--color-bg-subtle', TEXT, 'link on subtle background'],
   ['--color-link-hover', '--color-bg', TEXT, 'link hover on page'],
   ['--color-link-hover', '--color-surface', TEXT, 'link hover on card'],
+  // Featured experience card, Contact call-to-action card and the active menu link all sit on
+  // gradients that START at --color-primary-subtle (their most coloured point): the worst case.
+  ['--color-text', '--color-primary-subtle', TEXT, 'text on featured/CTA cards'],
+  [
+    '--color-text-muted',
+    '--color-primary-subtle',
+    TEXT,
+    'muted text (dates) on featured/CTA cards',
+  ],
+  [
+    '--color-link',
+    '--color-primary-subtle',
+    TEXT,
+    'company name / active menu link on featured/CTA cards',
+  ],
   ['--color-link', '--color-primary-subtle', TEXT, 'ghost/secondary button hover'],
   ['--color-link-hover', '--color-primary-subtle', TEXT, 'ghost/secondary hover text'],
   ['--color-text-on-primary', '--color-primary', TEXT, 'primary button label'],

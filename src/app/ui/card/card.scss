@@ -17,6 +17,14 @@
   box-shadow: none;
 }
 
+// Gradient from --color-primary-subtle (the most coloured point) to the surface.
+// Text contrast is checked against --color-primary-subtle by `npm run check:contrast`.
+:host([data-variant='featured']) {
+  background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-surface) 75%);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  box-shadow: var(--shadow-md);
+}
+
 :host([data-interactive]:hover) {
   border-color: var(--color-link);
   box-shadow: var(--shadow-md);

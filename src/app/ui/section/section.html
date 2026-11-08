@@ -1,8 +1,14 @@
 <section [id]="sectionId()" [attr.aria-labelledby]="headingId()" [class.subtle]="subtle()">
   <div class="container">
     <header class="header" appReveal>
-      @if (eyebrow(); as text) {
-        <p class="eyebrow">{{ text }}</p>
+      @if (label(); as text) {
+        <p class="eyebrow">
+          @if (number(); as value) {
+            <span class="num" aria-hidden="true">{{ value }}</span>
+            <span class="rule" aria-hidden="true"></span>
+          }
+          <span class="label">{{ text }}</span>
+        </p>
       }
       <h2 [id]="headingId()">{{ heading() }}</h2>
     </header>

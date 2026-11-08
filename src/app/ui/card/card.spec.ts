@@ -12,6 +12,9 @@ import { Card } from './card';
 })
 class Host {}
 
+@Component({ imports: [Card], template: `<app-card variant="featured">Current</app-card>` })
+class FeaturedHost {}
+
 describe('Card', () => {
   function setup() {
     const fixture = TestBed.createComponent(Host);
@@ -37,5 +40,12 @@ describe('Card', () => {
 
   it('supports the placeholder variant', () => {
     expect(setup().slot.getAttribute('data-variant')).toBe('placeholder');
+  });
+
+  it('supports the featured variant (used for the current role)', () => {
+    const fixture = TestBed.createComponent(FeaturedHost);
+    fixture.detectChanges();
+    const card = (fixture.nativeElement as HTMLElement).querySelector('app-card');
+    expect(card?.getAttribute('data-variant')).toBe('featured');
   });
 });

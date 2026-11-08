@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
 
-export type CardVariant = 'default' | 'placeholder';
+export type CardVariant = 'default' | 'placeholder' | 'featured';
 
 /**
  * Surface container. `placeholder` has a dashed border for "coming soon" slots.

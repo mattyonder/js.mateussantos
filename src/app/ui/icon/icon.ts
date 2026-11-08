@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 export type IconName =
-  'github' | 'linkedin' | 'mail' | 'download' | 'map-pin' | 'menu' | 'close' | 'code';
+  'github' | 'linkedin' | 'mail' | 'download' | 'map-pin' | 'menu' | 'close' | 'code' | 'arrow-up';
 
 /**
  * Stroke icons as inline SVG paths (no icon library, no extra request).
@@ -29,6 +29,7 @@ const PATHS: Readonly<Record<IconName, readonly string[]>> = {
   menu: ['M4 6h16', 'M4 12h16', 'M4 18h16'],
   close: ['M18 6 6 18', 'm6 6 12 12'],
   code: ['m16 18 6-6-6-6', 'm8 6-6 6 6 6'],
+  'arrow-up': ['M12 19V5', 'm5 12 7-7 7 7'],
 };
 
 /** Decorative icon: hidden from assistive technology. Put the meaning in nearby text. */
