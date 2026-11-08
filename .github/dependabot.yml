@@ -1,0 +1,29 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    # Angular packages must move together, so they arrive in a single pull request.
+    groups:
+      angular:
+        patterns:
+          - '@angular/*'
+          - '@angular-devkit/*'
+          - 'angular-eslint'
+    ignore:
+      # Angular declares the supported TypeScript range; a major outside it breaks the build.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+      # Keep the Node typings aligned with the lowest Node version the project supports.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
