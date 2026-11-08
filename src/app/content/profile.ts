@@ -53,6 +53,16 @@ export const WORKED_STACK = [
   'Tailwind CSS',
 ] as const;
 
+/** Key technologies shown as chips in the hero. All of them are in the résumé's skills. */
+export const HERO_STACK = [
+  'Angular',
+  'TypeScript',
+  'RxJS',
+  'Java',
+  'Spring Boot',
+  'PostgreSQL',
+] as const;
+
 export const SISPEC_STACK = [...WORKED_STACK, 'Jest'] as const;
 
 /** One résumé PDF per language (files live in `public/`). */

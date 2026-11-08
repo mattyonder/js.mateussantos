@@ -1,6 +1,6 @@
 import { LOCALES } from '../core/i18n/locales';
 import { CONTENT } from './index';
-import { PROFILE, RESUME_PATH } from './profile';
+import { HERO_STACK, PROFILE, RESUME_PATH } from './profile';
 import type { SiteContent } from './types';
 
 /** Flattens a value into a list of `path:type` / `path[]:length` entries describing its shape. */
@@ -96,11 +96,51 @@ describe('site content', () => {
       }
     });
 
-    it.each(entries)('%s: no "open to work" style wording', (_locale, content) => {
+    // Owner's decision (2026-11-08): a professional availability sentence in Contact ONLY.
+    const OPPORTUNITY = /oportunidade|opportunit/;
+
+    it.each(entries)(
+      '%s: availability is stated in the Contact intro and nowhere else',
+      (_l, content) => {
+        expect(content.contact.intro.toLowerCase()).toMatch(OPPORTUNITY);
+
+        const elsewhere = strings({ ...content, contact: { ...content.contact, intro: '' } })
+          .join(' ')
+          .toLowerCase();
+        expect(elsewhere).not.toMatch(OPPORTUNITY); // hero, about, meta description, share text...
+      },
+    );
+
+    it.each(entries)('%s: the tone stays professional (no pushy wording)', (_l, content) => {
       const all = strings(content).join(' ').toLowerCase();
       expect(all).not.toMatch(
-        /oportunidade|opportunit|open to work|contrate|hire me|disponível para/,
+        /contrate|hire me|open to work|opentowork|procurando emprego|looking for a job|disponível para|available for hire|urgente/,
       );
+    });
+
+    it.each(entries)(
+      '%s: the availability sentence covers software development with the stack (not front-end only)',
+      (_l, content) => {
+        const intro = content.contact.intro;
+        expect(intro).toMatch(/desenvolvimento de software|software development/);
+        for (const tool of ['Angular', 'TypeScript', 'Java', 'Spring Boot']) {
+          expect(intro).toContain(tool);
+        }
+      },
+    );
+
+    it.each(entries)('%s: the availability sentence is gender-neutral', (_l, content) => {
+      expect(content.contact.intro).not.toMatch(/\b(aberto|aberta)\b/i);
+    });
+
+    it('hero chips are all technologies listed in the résumé skills (nothing invented)', () => {
+      for (const locale of LOCALES) {
+        const technical =
+          CONTENT[locale].skills.groups.find((g) => g.id === 'technical')?.items ?? [];
+        for (const tech of HERO_STACK) {
+          expect(technical, `${tech} in ${locale} skills`).toContain(tech);
+        }
+      }
     });
 
     it.each(entries)('%s: shows only the approved location', (_locale, content) => {

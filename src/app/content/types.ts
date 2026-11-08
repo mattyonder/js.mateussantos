@@ -19,6 +19,14 @@ export interface PageMeta {
 export interface NavItem {
   readonly id: SectionId;
   readonly label: string;
+  /** Small label in the numbered section header ("02 ── Career"). Adds meaning, does not repeat the h2. */
+  readonly eyebrow: string;
+}
+
+/** A short, scannable card in the About section. Text must be a fragment of the résumé. */
+export interface Highlight {
+  readonly title: string;
+  readonly text: string;
 }
 
 export interface Position {
@@ -93,10 +101,13 @@ export interface SiteContent {
     readonly resumeLabel: string;
     readonly contactLabel: string;
     readonly profilesLabel: string;
+    /** Accessible name of the technology chips under the tagline. */
+    readonly stackLabel: string;
   };
   readonly about: {
     readonly heading: string;
     readonly summary: string;
+    readonly highlights: readonly Highlight[];
   };
   readonly experience: {
     readonly heading: string;
@@ -131,12 +142,15 @@ export interface SiteContent {
   };
   readonly contact: {
     readonly heading: string;
+    /** Professional statement of availability for conversations (owner's decision, Contact only). */
     readonly intro: string;
     readonly emailLabel: string;
+    readonly emailCta: string;
   };
   readonly footer: {
     readonly sourceCode: string;
     readonly license: string;
+    readonly backToTop: string;
   };
   readonly notFound: {
     readonly title: string;

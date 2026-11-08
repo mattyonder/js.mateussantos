@@ -25,12 +25,12 @@ export const EN: SiteContent = {
     opensInNewTab: '(opens in a new tab)',
   },
   nav: [
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'education', label: 'Education' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'about', label: 'About', eyebrow: 'Profile' },
+    { id: 'experience', label: 'Experience', eyebrow: 'Career' },
+    { id: 'projects', label: 'Projects', eyebrow: 'Work' },
+    { id: 'skills', label: 'Skills', eyebrow: 'Stack' },
+    { id: 'education', label: 'Education', eyebrow: 'Studies' },
+    { id: 'contact', label: 'Contact', eyebrow: "Let's talk" },
   ],
   hero: {
     name: 'Mateus de Jesus Santos',
@@ -42,12 +42,32 @@ export const EN: SiteContent = {
     resumeLabel: 'Download resume',
     contactLabel: 'Contact',
     profilesLabel: 'Professional profiles',
+    stackLabel: 'Main technologies',
   },
   about: {
     heading: 'About',
     summary:
       "Mid-Level Full Stack Developer with a Bachelor's degree in Information Systems, specialized in Front-end development with Angular and TypeScript, and complementary Back-end experience with Java and Spring Boot. Established track record developing and maintaining web systems for public healthcare management, focused on scalable components, complex state management, and RESTful API integration. Experienced in technical mentoring of developers, defining coding standards, and taking part in the entire development lifecycle, from prototype to production deployment. Combines technical rigor, clean code, and constant team collaboration to deliver high-impact solutions.",
+    highlights: [
+      {
+        title: 'Technical mentoring',
+        text: 'Mentoring interns and new developers on business rules and best practices with Angular, RxJS, and SASS.',
+      },
+      {
+        title: 'Coding standards',
+        text: 'Coding standards and technical validation checklists for Pull Requests.',
+      },
+      {
+        title: 'Automated testing',
+        text: 'Automated testing with Jest on my own initiative across the SISPEC system.',
+      },
+      {
+        title: 'From prototype to deploy',
+        text: 'Taking part in the entire development lifecycle, from prototype to production deployment.',
+      },
+    ],
   },
+
   experience: {
     heading: 'Experience',
     positions: [
@@ -192,12 +212,15 @@ export const EN: SiteContent = {
   },
   contact: {
     heading: 'Contact',
-    intro: 'For professional contact, reach out by email or LinkedIn.',
+    intro:
+      'Conversations about software development opportunities with Angular, TypeScript, Java or Spring Boot are welcome.',
     emailLabel: 'Email',
+    emailCta: 'Send an email',
   },
   footer: {
     sourceCode: 'Source code of this site',
     license: 'MIT License',
+    backToTop: 'Back to top',
   },
   notFound: {
     title: 'Page not found',

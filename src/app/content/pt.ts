@@ -18,12 +18,12 @@ export const PT: SiteContent = {
     opensInNewTab: '(abre em nova aba)',
   },
   nav: [
-    { id: 'about', label: 'Sobre' },
-    { id: 'experience', label: 'Experiência' },
-    { id: 'projects', label: 'Projetos' },
-    { id: 'skills', label: 'Habilidades' },
-    { id: 'education', label: 'Formação' },
-    { id: 'contact', label: 'Contato' },
+    { id: 'about', label: 'Sobre', eyebrow: 'Perfil' },
+    { id: 'experience', label: 'Experiência', eyebrow: 'Trajetória' },
+    { id: 'projects', label: 'Projetos', eyebrow: 'Trabalho' },
+    { id: 'skills', label: 'Habilidades', eyebrow: 'Stack' },
+    { id: 'education', label: 'Formação', eyebrow: 'Estudos' },
+    { id: 'contact', label: 'Contato', eyebrow: 'Conversa' },
   ],
   hero: {
     name: 'Mateus de Jesus Santos',
@@ -34,12 +34,32 @@ export const PT: SiteContent = {
     resumeLabel: 'Baixar currículo',
     contactLabel: 'Contato',
     profilesLabel: 'Perfis profissionais',
+    stackLabel: 'Principais tecnologias',
   },
   about: {
     heading: 'Sobre',
     summary:
       'Desenvolvedor Full Stack Pleno com Bacharelado em Sistemas de Informação, especializado em Front-end com Angular e TypeScript, e experiência complementar em Back-end com Java e Spring Boot. Atuação consolidada no desenvolvimento e manutenção de sistemas web para gestão pública na área da saúde, com foco em componentes escaláveis, gerenciamento de estado complexo e integração com APIs RESTful. Experiência em orientação técnica de desenvolvedores, definição de padrões de código e participação em todo o ciclo de desenvolvimento, do protótipo ao deploy em produção. Combina rigor técnico, código limpo e colaboração constante em equipe para entregar soluções de alto impacto.',
+    highlights: [
+      {
+        title: 'Mentoria técnica',
+        text: 'Orientando estagiários e novos desenvolvedores em regras de negócio e boas práticas com Angular, RxJS e SASS.',
+      },
+      {
+        title: 'Padrões de código',
+        text: 'Padrões de código e checklists de validação técnica para Pull Requests.',
+      },
+      {
+        title: 'Testes automatizados',
+        text: 'Testes automatizados com Jest por iniciativa própria no sistema SISPEC.',
+      },
+      {
+        title: 'Do protótipo ao deploy',
+        text: 'Participação em todo o ciclo de desenvolvimento, do protótipo ao deploy em produção.',
+      },
+    ],
   },
+
   experience: {
     heading: 'Experiência',
     positions: [
@@ -184,12 +204,15 @@ export const PT: SiteContent = {
   },
   contact: {
     heading: 'Contato',
-    intro: 'Para contato profissional, escreva por e-mail ou LinkedIn.',
+    intro:
+      'Conversas sobre oportunidades em desenvolvimento de software com Angular, TypeScript, Java ou Spring Boot são bem-vindas.',
     emailLabel: 'E-mail',
+    emailCta: 'Enviar e-mail',
   },
   footer: {
     sourceCode: 'Código-fonte deste site',
     license: 'Licença MIT',
+    backToTop: 'Voltar ao topo',
   },
   notFound: {
     title: 'Página não encontrada',
