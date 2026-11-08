@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  computed,
+  input,
+} from '@angular/core';
 
 /**
  * Page section with a heading. Renders a landmark `<section>` labelled by its
@@ -16,6 +22,8 @@ export class Section {
   readonly sectionId = input.required<string>();
   readonly heading = input.required<string>();
   readonly eyebrow = input<string>();
+  /** Tinted background, used to alternate sections and give the page rhythm. */
+  readonly subtle = input(false, { transform: booleanAttribute });
 
   protected readonly headingId = computed(() => `${this.sectionId()}-heading`);
 }
