@@ -1,0 +1,18 @@
+<app-section sectionId="skills" [heading]="skills().heading" subtle>
+  <div class="groups">
+    @for (group of skills().groups; track group.id) {
+      <app-card>
+        <h3>{{ group.title }}</h3>
+        <ul class="tags">
+          @for (item of group.items; track item) {
+            <li>
+              <app-tag [tone]="group.id === 'technical' ? 'primary' : 'neutral'">{{
+                item
+              }}</app-tag>
+            </li>
+          }
+        </ul>
+      </app-card>
+    }
+  </div>
+</app-section>

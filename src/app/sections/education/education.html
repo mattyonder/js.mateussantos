@@ -1,0 +1,27 @@
+<app-section sectionId="education" [heading]="education().heading">
+  <div class="columns">
+    <div>
+      <h3>{{ education().degreesHeading }}</h3>
+      <ul class="degrees">
+        @for (degree of education().degrees; track degree.title) {
+          <li>
+            <p class="degree">{{ degree.title }}</p>
+            <p class="institution">{{ degree.institution }}</p>
+            <p class="period">{{ degree.period }}</p>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <h3>{{ education().languagesHeading }}</h3>
+      <dl class="languages">
+        @for (language of education().languages; track language.name) {
+          <div class="row">
+            <dt class="name">{{ language.name }}</dt>
+            <dd class="level">{{ language.level }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </div>
+</app-section>

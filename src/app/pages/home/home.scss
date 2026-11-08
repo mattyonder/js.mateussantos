@@ -2,21 +2,3 @@
 main:focus {
   outline: none;
 }
-
-.hero {
-  display: grid;
-  gap: var(--space-4);
-  padding-block: var(--space-16);
-}
-
-.role {
-  color: var(--color-link);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
-}
-
-.tagline {
-  max-width: 40rem;
-  color: var(--color-text-muted);
-  font-size: var(--text-lg);
-}

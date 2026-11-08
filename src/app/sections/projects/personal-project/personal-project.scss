@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+app-card {
+  height: 100%;
+}
+
+.placeholder {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-3);
+  min-height: 9rem;
+  color: var(--color-text-muted);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+
+  app-icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-link);
+  }
+}
+
+h4 {
+  font-size: var(--text-lg);
+}
+
+.description {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
+.links {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}

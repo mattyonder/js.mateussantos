@@ -1,0 +1,51 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container layout">
+    <div class="text">
+      <p class="location">
+        <app-icon name="map-pin" />
+        <span>{{ hero().location }}</span>
+      </p>
+      <h1 id="hero-title">{{ hero().name }}</h1>
+      <p class="role">{{ hero().role }}</p>
+      <p class="tagline">{{ hero().tagline }}</p>
+
+      <div class="actions">
+        <a app-button size="lg" [href]="resumeHref()" download>
+          <app-icon name="download" />
+          {{ hero().resumeLabel }}
+        </a>
+        <a
+          app-button
+          size="lg"
+          variant="secondary"
+          [routerLink]="['/', locale()]"
+          fragment="contact"
+        >
+          {{ hero().contactLabel }}
+        </a>
+      </div>
+
+      <ul class="profiles" [attr.aria-label]="hero().profilesLabel">
+        @for (profile of profiles; track profile.id) {
+          <li>
+            <a [href]="profile.url" target="_blank" rel="noopener noreferrer">
+              <app-icon [name]="profile.id" />
+              {{ profile.label }}<app-new-tab-hint />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="photo-frame">
+      <img
+        class="photo"
+        [ngSrc]="photo.src"
+        [width]="photo.width"
+        [height]="photo.height"
+        [alt]="hero().photoAlt"
+        priority
+      />
+    </div>
+  </div>
+</section>

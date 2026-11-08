@@ -1,0 +1,33 @@
+@let item = project();
+@if (item.status === 'published') {
+  <app-card [interactive]="true">
+    <h4>{{ item.name }}</h4>
+    <p class="description">{{ item.description }}</p>
+    <ul class="stack">
+      @for (tech of item.stack; track tech) {
+        <li>
+          <app-tag>{{ tech }}</app-tag>
+        </li>
+      }
+    </ul>
+    <p class="links">
+      @if (item.url) {
+        <a [href]="item.url" target="_blank" rel="noopener noreferrer">
+          {{ item.url }}<app-new-tab-hint />
+        </a>
+      }
+      @if (item.repositoryUrl) {
+        <a [href]="item.repositoryUrl" target="_blank" rel="noopener noreferrer">
+          {{ item.repositoryUrl }}<app-new-tab-hint />
+        </a>
+      }
+    </p>
+  </app-card>
+} @else {
+  <app-card variant="placeholder">
+    <div class="placeholder">
+      <app-icon name="code" />
+      <p>{{ comingSoonLabel() }}</p>
+    </div>
+  </app-card>
+}

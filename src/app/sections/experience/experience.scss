@@ -1,0 +1,76 @@
+@use '../../../styles/breakpoints' as bp;
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: var(--space-8);
+  padding-left: var(--space-8);
+  list-style: none;
+
+  // The vertical line.
+  &::before {
+    content: '';
+    position: absolute;
+    top: var(--space-2);
+    bottom: var(--space-2);
+    left: 0.5rem;
+    width: 2px;
+    background: var(--color-border-strong);
+  }
+}
+
+.entry {
+  position: relative;
+
+  // The dot: outlined for past roles, filled for the current one.
+  &::before {
+    content: '';
+    position: absolute;
+    top: var(--space-6);
+    // Centres the 0.875rem dot on the 2px line (line centre = 0.5rem + 1px).
+    left: calc(-1 * var(--space-8) + 0.125rem);
+    width: 0.875rem;
+    height: 0.875rem;
+    box-sizing: border-box;
+    background: var(--color-bg-subtle);
+    border: 2px solid var(--color-link);
+    border-radius: var(--radius-full);
+  }
+
+  &.current::before {
+    background: var(--color-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.company {
+  color: var(--color-link);
+  font-weight: var(--weight-semibold);
+}
+
+.period {
+  color: var(--color-text-muted);
+}
+
+.highlights {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-left: var(--space-5);
+
+  li::marker {
+    color: var(--color-link);
+  }
+}

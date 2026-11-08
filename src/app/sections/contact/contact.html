@@ -1,0 +1,22 @@
+<app-section sectionId="contact" [heading]="contact().heading" subtle>
+  <p class="intro">{{ contact().intro }}</p>
+  <ul class="links">
+    <li>
+      <a class="link" [href]="mailto">
+        <app-icon name="mail" />
+        <span class="label">{{ contact().emailLabel }}</span>
+        <span class="value">{{ email }}</span>
+      </a>
+    </li>
+    @for (profile of profiles; track profile.id) {
+      <li>
+        <a class="link" [href]="profile.url" target="_blank" rel="noopener noreferrer">
+          <app-icon [name]="profile.id" />
+          <span class="label">{{ profile.label }}</span>
+          <span class="value">{{ profile.display }}</span>
+          <app-new-tab-hint />
+        </a>
+      </li>
+    }
+  </ul>
+</app-section>

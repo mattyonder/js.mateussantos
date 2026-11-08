@@ -1,0 +1,20 @@
+<app-section sectionId="experience" [heading]="experience().heading" subtle>
+  <ol class="timeline">
+    @for (position of experience().positions; track position.period) {
+      <li class="entry" [class.current]="position.current">
+        <app-card>
+          <h3>{{ position.role }}</h3>
+          <p class="meta">
+            <span class="company">{{ position.company }}</span>
+            <span class="period">{{ position.period }}</span>
+          </p>
+          <ul class="highlights">
+            @for (highlight of position.highlights; track highlight) {
+              <li>{{ highlight }}</li>
+            }
+          </ul>
+        </app-card>
+      </li>
+    }
+  </ol>
+</app-section>

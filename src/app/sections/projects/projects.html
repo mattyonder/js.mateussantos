@@ -1,0 +1,43 @@
+<app-section sectionId="projects" [heading]="projects().heading">
+  <h3 class="subheading">{{ projects().worked.heading }}</h3>
+  <p class="note">{{ projects().worked.note }}</p>
+  <ul class="systems">
+    @for (system of projects().worked.systems; track system.id) {
+      <li>
+        <app-card>
+          <h4>{{ system.name }}</h4>
+          <dl>
+            <dt>{{ projects().worked.roleLabel }}</dt>
+            <dd>{{ system.role }}</dd>
+            <dt>{{ projects().worked.stackLabel }}</dt>
+            <dd>
+              <ul class="stack">
+                @for (tech of system.stack; track tech) {
+                  <li>
+                    <app-tag>{{ tech }}</app-tag>
+                  </li>
+                }
+              </ul>
+            </dd>
+          </dl>
+        </app-card>
+      </li>
+    }
+  </ul>
+
+  <h3 class="subheading personal">{{ projects().personal.heading }}</h3>
+  <ul class="personal-grid">
+    @for (item of projects().personal.items; track $index) {
+      <li>
+        <app-personal-project
+          [project]="item"
+          [comingSoonLabel]="projects().personal.comingSoonLabel"
+        />
+      </li>
+    }
+  </ul>
+  <a app-button variant="secondary" [href]="githubUrl" target="_blank" rel="noopener noreferrer">
+    <app-icon name="github" />
+    {{ projects().personal.githubLabel }}<app-new-tab-hint />
+  </a>
+</app-section>

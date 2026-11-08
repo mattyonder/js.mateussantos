@@ -1,0 +1,74 @@
+@use '../../../styles/breakpoints' as bp;
+
+.subheading {
+  margin-bottom: var(--space-2);
+
+  &.personal {
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-6);
+  }
+}
+
+.note {
+  max-width: 44rem;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.systems,
+.personal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  list-style: none;
+
+  @include bp.up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.personal-grid {
+  margin-bottom: var(--space-8);
+
+  @include bp.up(md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.systems > li {
+  display: flex;
+
+  app-card {
+    flex: 1;
+  }
+}
+
+h4 {
+  font-size: var(--text-lg);
+}
+
+dl {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+dt {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: 0;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
