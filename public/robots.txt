@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ng-portifolio.vercel.app/sitemap.xml
+Sitemap: https://jsmateussantos.vercel.app/sitemap.xml

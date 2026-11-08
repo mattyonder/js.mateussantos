@@ -13,10 +13,10 @@ export const PROFILE = {
   /**
    * Public origin, used for canonical, hreflang, Open Graph and JSON-LD URLs, and to
    * generate sitemap.xml/robots.txt (scripts/generate-seo-files.mjs).
-   * Confirmed by the owner on 2026-11-08: https://ng-portifolio.vercel.app/pt is live.
+   * Confirmed by the owner on 2026-11-08: https://jsmateussantos.vercel.app/pt is live.
    * If a custom domain is bought later, change only this line and rebuild.
    */
-  siteUrl: 'https://ng-portifolio.vercel.app',
+  siteUrl: 'https://jsmateussantos.vercel.app',
   photo: { src: 'photo_me.webp', width: 400, height: 400 },
   /** Share image for Open Graph / Twitter (1200x630, generated from the same photo and brand colours). */
   shareImage: { src: 'og-image.jpg', width: 1200, height: 630 },
