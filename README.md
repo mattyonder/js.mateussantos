@@ -42,13 +42,18 @@ src/app/
   ui/         reusable base components
   sections/   page sections (hero, about, experience, ...)
   layout/     header, footer, skip link
+  pages/      routed pages (home, root-redirect, not-found)
 ```
+
+## Languages
+
+The site is served at `/pt` (pt-BR) and `/en`, both prerendered. `/` redirects to the remembered language, then the browser language, then English. All visible text lives in `src/app/content/pt.ts` and `en.ts`; both implement the same `SiteContent` type, so a missing key fails the build.
 
 ## Status
 
 - [x] Stage 1: scaffold and tooling
 - [x] Stage 2: design system
-- [ ] Stage 3: i18n
+- [x] Stage 3: i18n
 - [ ] Stage 4: sections and content
 - [ ] Stage 5: animations
 - [ ] Stage 6: accessibility, SEO and performance
