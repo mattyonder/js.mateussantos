@@ -1,8 +1,14 @@
 # ng-portifolio
 
-Bilingual (PT-BR / EN) professional portfolio of Mateus de Jesus Santos, a Full Stack developer focused on Angular. Static site (prerendered), hosted on Vercel.
+Bilingual (PT-BR / EN) professional portfolio of Mateus de Jesus Santos, a mid-level Full Stack developer focused on Angular. Static site (prerendered), hosted on Vercel.
 
-> Work in progress. This repository is built in stages; see the status below.
+**Live:** <https://jsmateussantos.vercel.app/pt> (Portuguese) and <https://jsmateussantos.vercel.app/en> (English).
+
+The site is also a study lab: modern Angular, front-end security, DevOps and English. Everything on it comes from the owner's résumé; nothing is invented.
+
+## What is on the page
+
+Hero (name, role, key technologies, photo), a numbers strip, About, Experience, Projects (systems worked on; personal projects are "coming soon"), Skills, Education and languages, Contact and a footer. Light and dark themes (system preference, remembered, no flash), a language switch that keeps the reader on the same section, and a menu that marks the section being read.
 
 ## Stack
 
@@ -10,6 +16,14 @@ Bilingual (PT-BR / EN) professional portfolio of Mateus de Jesus Santos, a Full 
 - TypeScript 6 (strict), SCSS with design tokens
 - Vitest (Angular CLI default runner) for unit tests
 - ESLint (`angular-eslint`, including template accessibility rules) and Prettier
+
+## Design and quality notes
+
+- **Design system:** purple palette as CSS tokens (`src/styles/_tokens.scss`); components use only the semantic tokens. Self-hosted fonts (Inter, Plus Jakarta Sans, DM Serif Display Italic for accent words), with metric-adjusted fallbacks so the font swap does not shift the layout.
+- **Accessibility (WCAG 2.2 AA):** `npm run check:contrast` validates every token pair in both themes (including text over gradients). Full keyboard use, visible focus, skip link, one `h1` and ordered headings, reduced motion respected in CSS and JS. Checked with axe-core and a real Chrome (keyboard order, reflow at 200% and 400% zoom, text-spacing override).
+- **Motion:** only `transform` and `opacity` (plus colour fades), nothing loops, and the hero never fades in (it holds the LCP).
+- **SEO:** per-language title and description, canonical, `hreflang` (with `x-default` = `/en`), Open Graph, Twitter card, JSON-LD `Person` (no email, phone or employer), sitemap and robots generated from `PROFILE.siteUrl`.
+- **Content rules:** the résumé is the source of truth (PT-BR PDF and EN PDF in `public/`). No phone number is shown on the site. Public health systems are mentioned only by name, role and stack, never screens, data or internal details. Tests in `src/app/content/content.spec.ts` enforce the parity of PT and EN and these rules.
 
 ## Requirements
 
@@ -49,6 +63,14 @@ src/app/
 
 The site is served at `/pt` (pt-BR) and `/en`, both prerendered. `/` redirects to the remembered language, then the browser language, then English. All visible text lives in `src/app/content/pt.ts` and `en.ts`; both implement the same `SiteContent` type, so a missing key fails the build.
 
+## Testing and verification
+
+| What                     | How                                                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unit and component tests | `npm run test:ci` (Vitest + jsdom): content parity, i18n, theme, SEO, every section and UI component                                                                                          |
+| Real-browser smoke test  | `npm run smoke`: serves `dist/` under the headers of `vercel.json` and drives Chrome, including real attacks (inline script, `onclick`, `eval`, `innerHTML`, framing) that the CSP must block |
+| Live deployment check    | `npm run verify:deploy [-- <url>]`: checks a real deploy (headers, CSP, SEO tags, caching, redirects, 404). Defaults to the production URL                                                    |
+
 ## Security and deployment
 
 Hosted on Vercel as a static site. `vercel.json` sets the build (`npm ci`, `npm run build`, output
@@ -78,6 +100,12 @@ cannot issue per-request nonces (angular.dev/best-practices/security).
 lint, contrast, unit tests, build, CSP hash check, the Chrome smoke test and `npm audit`. Actions are
 pinned to commit SHAs; Dependabot (`.github/dependabot.yml`) keeps them and the npm packages current.
 
+## Known limitations
+
+- An unknown URL returns HTTP 200 with the language chooser instead of a 404 (a catch-all rewrite on the host; the page is `noindex`, so the impact is small). The prerendered `/404` page itself works.
+- Lighthouse and axe numbers measured on a development machine are only indicative; re-measure on the live URL.
+- Not tested on Safari, Firefox, real phones or with a screen reader.
+
 ## Status
 
 - [x] Stage 1: scaffold and tooling
@@ -87,7 +115,7 @@ pinned to commit SHAs; Dependabot (`.github/dependabot.yml`) keeps them and the 
 - [x] Stage 5: animations
 - [x] Stage 6: accessibility, SEO and performance
 - [x] Stage 7: security, CI and deploy
-- [ ] Stage 8: final review
+- [x] Stage 8: final review
 
 ## License
 
