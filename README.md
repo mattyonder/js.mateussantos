@@ -55,7 +55,7 @@ The site is served at `/pt` (pt-BR) and `/en`, both prerendered. `/` redirects t
 - [x] Stage 2: design system
 - [x] Stage 3: i18n
 - [x] Stage 4: sections and content
-- [ ] Stage 5: animations
+- [x] Stage 5: animations
 - [ ] Stage 6: accessibility, SEO and performance
 - [ ] Stage 7: security, CI and deploy
 - [ ] Stage 8: final review
