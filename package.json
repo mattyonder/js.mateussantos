@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-seo-files.mjs && ng build && node scripts/inject-font-preloads.mjs",
+    "build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-seo-files.mjs && ng build && node scripts/postbuild.mjs",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "check:contrast": "node scripts/check-contrast.mjs",
@@ -12,7 +12,11 @@
     "test:ci": "ng test --watch=false",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "audit": "npm audit --audit-level=high"
+    "audit": "npm audit --audit-level=high",
+    "csp:check": "node scripts/csp.mjs",
+    "csp:update": "node scripts/csp.mjs --write",
+    "smoke": "node scripts/smoke-test.mjs",
+    "verify:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/verify-deploy.mjs"
   },
   "private": true,
   "packageManager": "npm@12.0.1",
@@ -42,7 +46,13 @@
     "prettier": "^3.8.1",
     "sass": "^1.108.1",
     "typescript": "~6.0.2",
-    "typescript-eslint": "8.71.0",
+    "typescript-eslint": "^8.72.1",
     "vitest": "^5.0.0"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26"
+  },
+  "overrides": {
+    "minimatch": "^11.0.5"
   }
 }

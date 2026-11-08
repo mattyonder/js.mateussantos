@@ -1,5 +1,9 @@
-// Adds <link rel="preload"> for the two web fonts to every prerendered HTML file.
+// Post-build steps that need the finished `dist/` (run right after `ng build`):
+//   1. Adds <link rel="preload"> for the two web fonts to every prerendered HTML file.
+//   2. Copies the prerendered 404 page to `404.html` at the root, the conventional
+//      name static hosts use for "page not found" (see vercel.json).
 //
+// --- 1. Font preloads ---
 // Why: the @font-face rules live in the stylesheet, so the browser only discovers the
 // fonts after CSS is parsed, which delays the swap (and text paint with the right font).
 // Preloading starts the download at the very beginning. The file names carry a content
@@ -7,7 +11,14 @@
 //
 // `crossorigin` is required for font preloads even on the same origin.
 
-import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import {
+  copyFileSync,
+  existsSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  statSync,
+} from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -44,3 +55,14 @@ for (const file of htmlFiles(dist)) {
   patched++;
 }
 console.log(`Font preloads (${fonts.length}) injected into ${patched} HTML file(s)`);
+
+// --- 2. 404.html ---
+// The 404 route is prerendered at /404 (404/index.html). Static hosts look for 404.html.
+// The page uses root-relative assets (<base href="/">), so it renders correctly from any URL.
+const notFoundSource = join(dist, '404', 'index.html');
+if (!existsSync(notFoundSource)) {
+  console.error('404/index.html not found: the 404 route was not prerendered');
+  process.exit(1);
+}
+copyFileSync(notFoundSource, join(dist, '404.html'));
+console.log('404.html created from the prerendered 404 page');
