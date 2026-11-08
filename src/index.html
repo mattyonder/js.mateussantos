@@ -25,7 +25,14 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--
+      Tab icon: a "M" monogram (Plus Jakarta Sans ExtraBold, glyph outlined to a path) on
+      the site's purple. SVG for modern browsers; ICO (16/32/48) as the universal fallback;
+      PNG for iOS home screens. With both icon links present, browsers that support SVG pick it.
+    -->
+    <link rel="icon" href="favicon.ico" sizes="32x32" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   </head>
   <body>
     <app-root></app-root>
