@@ -1,0 +1,13 @@
+<footer>
+  <div class="container bar">
+    <p>© {{ year }} {{ name }}</p>
+    <ul>
+      <li>
+        <a [href]="repositoryUrl" target="_blank" rel="noopener noreferrer">
+          {{ footer().sourceCode }}<app-new-tab-hint />
+        </a>
+      </li>
+      <li>{{ footer().license }}</li>
+    </ul>
+  </div>
+</footer>

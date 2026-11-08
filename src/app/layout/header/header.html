@@ -1,9 +1,33 @@
 <header>
   <div class="container bar">
     <span class="brand">{{ name() }}</span>
+
+    <nav [id]="navId" class="nav" [class.open]="open()" [attr.aria-label]="a11y().mainNavigation">
+      <ul>
+        @for (item of nav(); track item.id) {
+          <li>
+            <a [routerLink]="['/', locale()]" [fragment]="item.id" (click)="close()">{{
+              item.label
+            }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
     <div class="controls">
       <app-language-switch />
-      <app-theme-toggle [label]="themeLabel()" />
+      <app-theme-toggle [label]="a11y().themeToggle" />
+      <button
+        #menuButton
+        type="button"
+        class="menu-button"
+        [attr.aria-label]="a11y().menu"
+        [attr.aria-expanded]="open()"
+        [attr.aria-controls]="navId"
+        (click)="toggle()"
+      >
+        <app-icon [name]="open() ? 'close' : 'menu'" />
+      </button>
     </div>
   </div>
 </header>
