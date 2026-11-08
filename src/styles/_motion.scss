@@ -1,0 +1,46 @@
+// Motion. Rules of this site:
+//  - Animate only `transform` and `opacity` where possible (they do not trigger layout).
+//  - Nothing loops forever (WCAG 2.2 SC 2.2.2).
+//  - `prefers-reduced-motion: reduce` is handled globally in `_base.scss`.
+
+// ---- Scroll reveal (see ui/reveal/reveal.ts) ----
+// The natural state (no attribute) is fully visible, so prerendered HTML, no-JS,
+// reduced motion and print are never hidden. `!important` keeps these rules ahead
+// of components' own `transition`/`transform` while an element is being revealed;
+// the attribute is removed right after, so hover effects work normally afterwards.
+[data-reveal='pending'] {
+  opacity: 0 !important;
+  transform: translateY(1.25rem) !important;
+}
+
+[data-reveal='visible'] {
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out) !important;
+  transition-delay: var(--reveal-delay, 0ms) !important;
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+// ---- Theme change ----
+// ThemeService adds `theme-transition` to <html> for ~400ms after the user toggles
+// the theme, so colours fade instead of snapping. It is never present on load, so
+// the no-flash bootstrap still paints the right theme instantly.
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    fill var(--duration-base) var(--ease-out),
+    stroke var(--duration-base) var(--ease-out) !important;
+}

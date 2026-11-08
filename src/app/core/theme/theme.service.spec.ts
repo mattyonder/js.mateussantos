@@ -1,5 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { THEME_STORAGE_KEY, ThemeService } from './theme.service';
+import {
+  THEME_STORAGE_KEY,
+  THEME_TRANSITION_CLASS,
+  THEME_TRANSITION_MS,
+  ThemeService,
+} from './theme.service';
 
 type ChangeListener = (event: { matches: boolean }) => void;
 
@@ -27,6 +32,7 @@ describe('ThemeService', () => {
 
   beforeEach(() => {
     root.removeAttribute('data-theme');
+    root.classList.remove(THEME_TRANSITION_CLASS);
     localStorage.clear();
     Reflect.deleteProperty(window, 'matchMedia');
   });
@@ -34,6 +40,7 @@ describe('ThemeService', () => {
   afterEach(() => {
     vi.restoreAllMocks();
     root.removeAttribute('data-theme');
+    root.classList.remove(THEME_TRANSITION_CLASS);
     localStorage.clear();
     Reflect.deleteProperty(window, 'matchMedia');
   });
@@ -105,5 +112,65 @@ describe('ThemeService', () => {
     service.set('light'); // explicit choice
     media.emit(true);
     expect(service.theme()).toBe('light');
+  });
+  describe('colour transition on change', () => {
+    /** matchMedia stub that answers the reduced-motion query separately from the colour scheme. */
+    function stubMotion(reduced: boolean): void {
+      Object.defineProperty(window, 'matchMedia', {
+        configurable: true,
+        writable: true,
+        value: vi.fn((query: string) => ({
+          matches: query.includes('reduced-motion') ? reduced : false,
+          addEventListener: () => undefined,
+        })),
+      });
+    }
+
+    beforeEach(() => vi.useFakeTimers());
+    afterEach(() => vi.useRealTimers());
+
+    it('adds the transition class when the user toggles, and removes it afterwards', () => {
+      stubMotion(false);
+      const service = create();
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(false); // never on load
+
+      service.toggle();
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(true);
+
+      vi.advanceTimersByTime(THEME_TRANSITION_MS - 1);
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(true);
+      vi.advanceTimersByTime(2);
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(false);
+    });
+
+    it('restarts the window when toggled again quickly', () => {
+      stubMotion(false);
+      const service = create();
+
+      service.toggle();
+      vi.advanceTimersByTime(300);
+      service.toggle();
+      vi.advanceTimersByTime(300); // 600ms after the first toggle, 300ms after the second
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(true);
+      vi.advanceTimersByTime(150);
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(false);
+    });
+
+    it('does NOT animate with prefers-reduced-motion', () => {
+      stubMotion(true);
+      const service = create();
+
+      service.toggle();
+
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(false);
+      expect(service.theme()).toBe('dark'); // the change itself still happens
+    });
+
+    it('does not animate the initial theme', () => {
+      stubMotion(false);
+      root.setAttribute('data-theme', 'dark');
+      create();
+      expect(root.classList.contains(THEME_TRANSITION_CLASS)).toBe(false);
+    });
   });
 });

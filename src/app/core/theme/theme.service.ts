@@ -1,7 +1,13 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { prefersReducedMotion } from '../motion/motion';
 
 export type Theme = 'light' | 'dark';
+
+/** Class on <html> that enables colour transitions (see `_motion.scss`). */
+export const THEME_TRANSITION_CLASS = 'theme-transition';
+/** How long the class stays: a bit longer than `--duration-base` (250ms). */
+export const THEME_TRANSITION_MS = 400;
 
 /**
  * Must match the key read by the inline no-flash script in `src/index.html`.
@@ -31,6 +37,7 @@ export class ThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly current = signal<Theme>('light');
+  private transitionTimer: number | undefined;
 
   readonly theme = this.current.asReadonly();
 
@@ -50,8 +57,28 @@ export class ThemeService {
 
   /** Sets an explicit theme and persists it as the user's choice. */
   set(theme: Theme): void {
+    // Only an explicit choice animates: never the first paint, never an OS-driven change.
+    this.playTransition();
     this.apply(theme);
     this.writeStored(theme);
+  }
+
+  /**
+   * Enables colour transitions on <html> just before the theme attribute changes,
+   * then removes them. Skipped for `prefers-reduced-motion`.
+   */
+  private playTransition(): void {
+    const win = this.document.defaultView;
+    if (!win || prefersReducedMotion(win)) {
+      return;
+    }
+    const root = this.document.documentElement;
+    root.classList.add(THEME_TRANSITION_CLASS);
+    win.clearTimeout(this.transitionTimer);
+    this.transitionTimer = win.setTimeout(
+      () => root.classList.remove(THEME_TRANSITION_CLASS),
+      THEME_TRANSITION_MS,
+    );
   }
 
   private apply(theme: Theme): void {
