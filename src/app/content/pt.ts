@@ -1,3 +1,4 @@
+import { SISPEC_STACK, WORKED_STACK } from './profile';
 import type { SiteContent } from './types';
 
 /** PT-BR content. Source of truth: the PT-BR résumé. */
@@ -11,6 +12,8 @@ export const PT: SiteContent = {
     skipToContent: 'Pular para o conteúdo',
     themeToggle: 'Tema escuro',
     mainNavigation: 'Navegação principal',
+    menu: 'Menu',
+    opensInNewTab: '(abre em nova aba)',
   },
   nav: [
     { id: 'about', label: 'Sobre' },
@@ -78,25 +81,25 @@ export const PT: SiteContent = {
           id: 'sispec',
           name: 'SISPEC',
           role: 'Liderança do desenvolvimento front-end e evolução da arquitetura do monorepo Nx; criação do módulo de Urgência e Emergência; testes automatizados com Jest.',
-          stack: ['Angular', 'RxJS', 'SASS', 'Nx', 'Jest', 'Java', 'Spring Boot'],
+          stack: SISPEC_STACK,
         },
         {
           id: 'almoxarifado',
           name: 'Almoxarifado',
           role: 'Desenvolvimento da maior parte das interfaces; APIs RESTful e correção de bugs críticos.',
-          stack: ['Angular', 'Java', 'Spring Boot'],
+          stack: WORKED_STACK,
         },
         {
           id: 'ipe-saude',
           name: 'Painel médico de prioridades do IPE Saúde',
           role: 'Único desenvolvedor front-end, com foco em modularização e componentes reutilizáveis.',
-          stack: ['Angular'],
+          stack: WORKED_STACK,
         },
         {
           id: 'regulacao',
           name: 'Regulação',
           role: 'Funcionalidades críticas de identificação de usuários, sob prazo apertado; scripts SQL de correção de dados.',
-          stack: ['PostgreSQL', 'SQL'],
+          stack: WORKED_STACK,
         },
       ],
     },
@@ -155,6 +158,7 @@ export const PT: SiteContent = {
   },
   education: {
     heading: 'Formação e idiomas',
+    degreesHeading: 'Formação acadêmica',
     degrees: [
       {
         title: 'Bacharelado em Sistemas de Informação',

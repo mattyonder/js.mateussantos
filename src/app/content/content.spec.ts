@@ -109,6 +109,17 @@ describe('site content', () => {
     });
 
     it.each(entries)(
+      '%s: all systems share the owner-confirmed stack; only SISPEC adds Jest',
+      (_locale, content) => {
+        const base = ['Angular', 'RxJS', 'Nx', 'Java', 'Spring Boot', 'PostgreSQL', 'Tailwind CSS'];
+        for (const system of content.projects.worked.systems) {
+          const expected = system.id === 'sispec' ? [...base, 'Jest'] : base;
+          expect([...system.stack]).toEqual(expected);
+        }
+      },
+    );
+
+    it.each(entries)(
       '%s: placeholders carry NO name, description or technology',
       (_locale, content) => {
         const { items } = content.projects.personal;

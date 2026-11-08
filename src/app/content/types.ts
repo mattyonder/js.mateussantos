@@ -76,6 +76,10 @@ export interface SiteContent {
     readonly skipToContent: string;
     readonly themeToggle: string;
     readonly mainNavigation: string;
+    /** Name of the button that opens/closes the navigation on small screens. */
+    readonly menu: string;
+    /** Announced after the text of links that open in a new tab. */
+    readonly opensInNewTab: string;
   };
   readonly nav: readonly NavItem[];
   readonly hero: {
@@ -118,6 +122,7 @@ export interface SiteContent {
   };
   readonly education: {
     readonly heading: string;
+    readonly degreesHeading: string;
     readonly degrees: readonly Degree[];
     readonly languagesHeading: string;
     readonly languages: readonly SpokenLanguage[];

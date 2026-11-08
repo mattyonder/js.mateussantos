@@ -1,3 +1,4 @@
+import { SISPEC_STACK, WORKED_STACK } from './profile';
 import type { SiteContent } from './types';
 
 /**
@@ -17,6 +18,8 @@ export const EN: SiteContent = {
     skipToContent: 'Skip to content',
     themeToggle: 'Dark theme',
     mainNavigation: 'Main navigation',
+    menu: 'Menu',
+    opensInNewTab: '(opens in a new tab)',
   },
   nav: [
     { id: 'about', label: 'About' },
@@ -85,25 +88,25 @@ export const EN: SiteContent = {
           id: 'sispec',
           name: 'SISPEC',
           role: 'Led front-end development and evolved the Nx monorepo architecture; created the Emergency and Urgent Care module; introduced automated testing with Jest.',
-          stack: ['Angular', 'RxJS', 'SASS', 'Nx', 'Jest', 'Java', 'Spring Boot'],
+          stack: SISPEC_STACK,
         },
         {
           id: 'almoxarifado',
           name: 'Almoxarifado (Inventory Management)',
           role: 'Developed most of the interfaces; built RESTful APIs and resolved critical bugs.',
-          stack: ['Angular', 'Java', 'Spring Boot'],
+          stack: WORKED_STACK,
         },
         {
           id: 'ipe-saude',
           name: 'IPE Saúde medical priority panel',
           role: 'Sole front-end developer, focusing on modularization and reusable components.',
-          stack: ['Angular'],
+          stack: WORKED_STACK,
         },
         {
           id: 'regulacao',
           name: 'Regulação (Regulation)',
           role: 'Implemented critical user identification features under tight deadlines; wrote SQL data-correction scripts.',
-          stack: ['PostgreSQL', 'SQL'],
+          stack: WORKED_STACK,
         },
       ],
     },
@@ -163,6 +166,7 @@ export const EN: SiteContent = {
   },
   education: {
     heading: 'Education and languages',
+    degreesHeading: 'Education',
     degrees: [
       {
         title: "Bachelor's Degree in Information Systems",

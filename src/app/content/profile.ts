@@ -18,7 +18,40 @@ export const PROFILE = {
    */
   siteUrl: 'https://ng-portifolio.vercel.app',
   photo: { src: 'photo_me.jpg', width: 400, height: 400 },
+  /** Public profiles, in display order. `id` doubles as the icon name. */
+  profiles: [
+    {
+      id: 'github',
+      label: 'GitHub',
+      url: 'https://github.com/mattyonder',
+      display: 'github.com/mattyonder',
+    },
+    {
+      id: 'linkedin',
+      label: 'LinkedIn',
+      url: 'https://linkedin.com/in/js-mateussantos/',
+      display: 'linkedin.com/in/js-mateussantos',
+    },
+  ],
 } as const;
+
+/**
+ * Technologies used in the systems listed under Projects. Language-independent,
+ * so it lives here and both content files reference it (they cannot diverge).
+ * Confirmed by the owner: all four systems share this stack; only SISPEC also
+ * uses Jest.
+ */
+export const WORKED_STACK = [
+  'Angular',
+  'RxJS',
+  'Nx',
+  'Java',
+  'Spring Boot',
+  'PostgreSQL',
+  'Tailwind CSS',
+] as const;
+
+export const SISPEC_STACK = [...WORKED_STACK, 'Jest'] as const;
 
 /** One résumé PDF per language (files live in `public/`). */
 export const RESUME_PATH: Readonly<Record<Locale, string>> = {
