@@ -2,7 +2,7 @@
   <ol class="timeline">
     @for (position of experience().positions; track position.period) {
       <li class="entry" [class.current]="position.current" [appReveal]="$index * 120">
-        <app-card>
+        <app-card [variant]="position.current ? 'featured' : 'default'">
           <h3>{{ position.role }}</h3>
           <p class="meta">
             <span class="company">{{ position.company }}</span>

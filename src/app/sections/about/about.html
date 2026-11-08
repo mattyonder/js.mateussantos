@@ -1,0 +1,14 @@
+<app-section sectionId="about" [heading]="about().heading">
+  <div class="bento">
+    <app-card class="summary" appReveal>
+      <p>{{ about().summary }}</p>
+    </app-card>
+
+    @for (item of about().highlights; track item.title) {
+      <app-card class="highlight" [appReveal]="($index + 1) * 80">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.text }}</p>
+      </app-card>
+    }
+  </div>
+</app-section>

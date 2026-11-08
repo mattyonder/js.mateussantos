@@ -1,0 +1,48 @@
+@use '../../../styles/breakpoints' as bp;
+
+// 1 column on phones; 2 from `md` (summary on top, highlights 2x2);
+// from `lg` the summary takes the left half and the highlights fill the right 2x2.
+.bento {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+
+  @include bp.up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp.up(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.summary {
+  padding: var(--space-8);
+
+  @include bp.up(md) {
+    grid-column: span 2;
+  }
+
+  @include bp.up(lg) {
+    grid-row: span 2;
+  }
+
+  p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+  }
+}
+
+.highlight {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+
+  h3 {
+    font-size: var(--text-lg);
+  }
+
+  p {
+    color: var(--color-text-muted);
+  }
+}

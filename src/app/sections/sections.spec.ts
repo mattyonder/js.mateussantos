@@ -1,5 +1,5 @@
 import { CONTENT } from '../content';
-import { PROFILE } from '../content/profile';
+import { PROFILE, RESUME_PATH } from '../content/profile';
 import { LOCALES } from '../core/i18n/locales';
 import { render, root, texts } from '../testing/render';
 import { About } from './about/about';
@@ -17,6 +17,22 @@ describe.each(LOCALES)('content sections (%s)', (locale) => {
       expect(el.querySelector('section')?.id).toBe('about');
       expect(el.querySelector('h2')?.textContent?.trim()).toBe(content.about.heading);
       expect(el.querySelector('.summary')?.textContent?.trim()).toBe(content.about.summary);
+    });
+  });
+
+  describe('About highlights (bento)', () => {
+    it('keeps the full résumé summary in its own card', () => {
+      const el = root(render(About, locale));
+      expect(el.querySelector('.summary')?.textContent?.trim()).toBe(content.about.summary);
+    });
+
+    it('shows one card per highlight with its title as an h3', () => {
+      const cards = Array.from(root(render(About, locale)).querySelectorAll('.highlight'));
+      expect(cards.length).toBe(content.about.highlights.length);
+      content.about.highlights.forEach((item, index) => {
+        expect(cards[index].querySelector('h3')?.textContent?.trim()).toBe(item.title);
+        expect(cards[index].querySelector('p')?.textContent?.trim()).toBe(item.text);
+      });
     });
   });
 
@@ -42,6 +58,13 @@ describe.each(LOCALES)('content sections (%s)', (locale) => {
         root(render(Experience, locale)).querySelectorAll<HTMLElement>('.timeline > li'),
       );
       expect(entries.map((e) => e.classList.contains('current'))).toEqual([true, false]);
+    });
+
+    it('highlights only the current role with the featured card', () => {
+      const variants = Array.from(
+        root(render(Experience, locale)).querySelectorAll('.timeline app-card'),
+      ).map((card) => card.getAttribute('data-variant'));
+      expect(variants).toEqual(['featured', 'default']);
     });
 
     it('uses an ordered list (the timeline has a sequence)', () => {
@@ -91,12 +114,28 @@ describe.each(LOCALES)('content sections (%s)', (locale) => {
   });
 
   describe('Contact', () => {
-    it('shows the e-mail in plain text and as a mailto link', () => {
+    it('shows the e-mail in plain text and as a mailto link card', () => {
       const el = root(render(Contact, locale));
-      const mail = el.querySelector<HTMLAnchorElement>('a[href^="mailto:"]');
+      const mail = el.querySelector<HTMLAnchorElement>('a.link[href^="mailto:"]');
       expect(mail?.getAttribute('href')).toBe(`mailto:${PROFILE.email}`);
       expect(mail?.textContent).toContain(PROFILE.email);
       expect(mail?.textContent).toContain(content.contact.emailLabel);
+    });
+
+    it('opens with the professional availability statement', () => {
+      const el = root(render(Contact, locale));
+      expect(el.querySelector('.intro')?.textContent?.trim()).toBe(content.contact.intro);
+    });
+
+    it('offers the two main actions: write an e-mail and download the résumé of this language', () => {
+      const el = root(render(Contact, locale));
+      const email = el.querySelector<HTMLAnchorElement>('.actions a[href^="mailto:"]');
+      expect(email?.textContent?.trim()).toBe(content.contact.emailCta);
+      expect(email?.getAttribute('href')).toBe(`mailto:${PROFILE.email}`);
+
+      const resume = el.querySelector<HTMLAnchorElement>('.actions a[download]');
+      expect(resume?.textContent?.trim()).toBe(content.hero.resumeLabel);
+      expect(resume?.getAttribute('href')).toBe(RESUME_PATH[locale]);
     });
 
     it('links LinkedIn and GitHub safely in new tabs', () => {

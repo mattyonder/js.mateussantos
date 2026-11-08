@@ -1,22 +1,37 @@
 <app-section sectionId="contact" [heading]="contact().heading" subtle>
-  <p class="intro" appReveal>{{ contact().intro }}</p>
-  <ul class="links">
-    <li appReveal>
-      <a class="link" [href]="mailto">
-        <app-icon name="mail" />
-        <span class="label">{{ contact().emailLabel }}</span>
-        <span class="value">{{ email }}</span>
-      </a>
-    </li>
-    @for (profile of profiles; track profile.id) {
-      <li [appReveal]="($index + 1) * 100">
-        <a class="link" [href]="profile.url" target="_blank" rel="noopener noreferrer">
-          <app-icon [name]="profile.id" />
-          <span class="label">{{ profile.label }}</span>
-          <span class="value">{{ profile.display }}</span>
-          <app-new-tab-hint />
+  <div class="cta-card" appReveal>
+    <div class="copy">
+      <p class="intro">{{ contact().intro }}</p>
+      <div class="actions">
+        <a app-button size="lg" [href]="mailto">
+          <app-icon name="mail" />
+          {{ contact().emailCta }}
+        </a>
+        <a app-button size="lg" variant="secondary" [href]="resumeHref()" download>
+          <app-icon name="download" />
+          {{ resumeLabel() }}
+        </a>
+      </div>
+    </div>
+
+    <ul class="links">
+      <li>
+        <a class="link" [href]="mailto">
+          <app-icon name="mail" />
+          <span class="label">{{ contact().emailLabel }}</span>
+          <span class="value">{{ email }}</span>
         </a>
       </li>
-    }
-  </ul>
+      @for (profile of profiles; track profile.id) {
+        <li>
+          <a class="link" [href]="profile.url" target="_blank" rel="noopener noreferrer">
+            <app-icon [name]="profile.id" />
+            <span class="label">{{ profile.label }}</span>
+            <span class="value">{{ profile.display }}</span>
+            <app-new-tab-hint />
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
 </app-section>

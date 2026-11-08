@@ -1,5 +1,5 @@
 import { CONTENT } from '../../content';
-import { PROFILE, RESUME_PATH } from '../../content/profile';
+import { HERO_STACK, PROFILE, RESUME_PATH } from '../../content/profile';
 import { LOCALES } from '../../core/i18n/locales';
 import { render, root, texts } from '../../testing/render';
 import { Hero } from './hero';
@@ -15,6 +15,12 @@ describe('Hero', () => {
       expect(el.querySelector('.role')?.textContent?.trim()).toBe(content.role);
       expect(el.querySelector('.tagline')?.textContent?.trim()).toBe(content.tagline);
       expect(el.querySelector('.location')?.textContent?.trim()).toBe(content.location);
+    });
+
+    it('lists the key technologies as a labelled list of chips under the tagline', () => {
+      const list = root(render(Hero, locale)).querySelector('ul.stack') as HTMLElement;
+      expect(list.getAttribute('aria-label')).toBe(content.stackLabel);
+      expect(texts(list.querySelectorAll('app-tag'))).toEqual([...HERO_STACK]);
     });
 
     it('downloads the résumé in its own language', () => {

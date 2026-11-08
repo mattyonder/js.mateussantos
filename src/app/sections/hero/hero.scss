@@ -99,23 +99,45 @@
   }
 }
 
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+// Arch-shaped portrait with an outlined frame shifted behind it. The top radii add up to the
+// width (half each), so the top is a true semicircle. Fixed size: no layout shift.
 .photo-frame {
+  position: relative;
   justify-self: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translate(0.875rem, 0.875rem);
+    border: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+    border-radius: 6.5rem 6.5rem var(--radius-xl) var(--radius-xl);
+
+    @include bp.up(md) {
+      border-radius: 8.5rem 8.5rem var(--radius-xl) var(--radius-xl);
+    }
+  }
 }
 
 .photo {
-  width: 12rem;
-  height: 12rem;
-  border-radius: var(--radius-full);
+  position: relative;
+  width: 13rem;
+  height: 16rem;
+  border-radius: 6.5rem 6.5rem var(--radius-xl) var(--radius-xl);
   object-fit: cover;
-  box-shadow:
-    0 0 0 4px var(--color-bg),
-    0 0 0 8px color-mix(in srgb, var(--color-primary) 35%, transparent),
-    var(--shadow-lg);
+  box-shadow: var(--shadow-lg);
 
   @include bp.up(md) {
-    width: 18rem;
-    height: 18rem;
+    width: 17rem;
+    height: 21rem;
+    border-radius: 8.5rem 8.5rem var(--radius-xl) var(--radius-xl);
   }
 }
 
@@ -138,7 +160,7 @@
   animation: rise var(--duration-slow) var(--ease-out) backwards;
 }
 
-@for $i from 1 through 6 {
+@for $i from 1 through 7 {
   .text > :nth-child(#{$i}) {
     animation-delay: #{($i - 1) * 70}ms;
   }

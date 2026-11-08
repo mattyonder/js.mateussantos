@@ -9,6 +9,14 @@
       <p class="role">{{ hero().role }}</p>
       <p class="tagline">{{ hero().tagline }}</p>
 
+      <ul class="stack" [attr.aria-label]="hero().stackLabel">
+        @for (tech of stack; track tech) {
+          <li>
+            <app-tag>{{ tech }}</app-tag>
+          </li>
+        }
+      </ul>
+
       <div class="actions">
         <a app-button size="lg" [href]="resumeHref()" download>
           <app-icon name="download" />

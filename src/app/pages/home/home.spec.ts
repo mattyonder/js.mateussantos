@@ -79,10 +79,22 @@ describe.each(LOCALES)('Home page (%s)', (locale) => {
     expect(el.textContent).not.toMatch(/\(?\d{2}\)?\s?9\s?\d{4}[-\s]?\d{4}/);
   });
 
-  it('never invites to "open to work" anywhere on the page', () => {
-    expect(page().textContent?.toLowerCase()).not.toMatch(
-      /oportunidade|opportunit|open to work|contrate|hire me/,
-    );
+  it('states availability only inside the Contact section, and never in a pushy way', () => {
+    const el = page();
+    const contact = el.querySelector('#contact') as HTMLElement;
+    expect(contact.textContent).toContain(content.contact.intro);
+
+    const outside = Array.from(el.querySelectorAll('main section[id]'))
+      .filter((section) => section.id !== 'contact')
+      .map((section) => section.textContent)
+      .concat(
+        el.querySelector('app-hero')?.textContent ?? '',
+        el.querySelector('header')?.textContent ?? '',
+      )
+      .join(' ')
+      .toLowerCase();
+    expect(outside).not.toMatch(/oportunidade|opportunit/);
+    expect(el.textContent?.toLowerCase()).not.toMatch(/contrate|hire me|open to work|opentowork/);
   });
 
   it('shows the section headings from the content file', () => {
