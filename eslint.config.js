@@ -23,10 +23,12 @@ module.exports = defineConfig([
           style: 'camelCase',
         },
       ],
+      // `attribute` is allowed so components can enhance native elements
+      // (e.g. `a[app-button]`) and keep their semantics.
       '@angular-eslint/component-selector': [
         'error',
         {
-          type: 'element',
+          type: ['element', 'attribute'],
           prefix: 'app',
           style: 'kebab-case',
         },
