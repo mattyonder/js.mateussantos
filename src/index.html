@@ -5,6 +5,26 @@
     <title>Portfolio</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Lets the browser render native UI (scrollbars, form controls) in the right scheme. -->
+    <meta name="color-scheme" content="light dark" />
+    <!--
+      No-flash theme bootstrap. Runs synchronously before first paint so the page
+      never renders in the wrong theme. Keep the storage key ('theme') in sync with
+      THEME_STORAGE_KEY in src/app/core/theme/theme.service.ts.
+      This is an inline script: the CSP (Stage 7) must allow it by hash.
+      If anything throws, data-theme stays unset and CSS falls back to the OS preference.
+    -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('theme');
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
