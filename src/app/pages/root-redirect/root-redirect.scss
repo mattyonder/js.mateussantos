@@ -1,0 +1,23 @@
+.chooser {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-20);
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: var(--space-5);
+  border: 2px solid var(--color-link);
+  border-radius: var(--radius-full);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}

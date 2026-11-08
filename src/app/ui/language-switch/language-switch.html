@@ -1,0 +1,8 @@
+<a
+  [routerLink]="['/', target().code]"
+  [attr.lang]="target().htmlLang"
+  [attr.hreflang]="target().hreflang"
+  (click)="remember()"
+>
+  {{ target().name }}
+</a>

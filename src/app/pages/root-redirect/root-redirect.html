@@ -1,0 +1,16 @@
+<main class="container chooser">
+  <h1>{{ name }}</h1>
+  <ul>
+    @for (locale of locales; track locale.code) {
+      <li>
+        <a
+          [routerLink]="['/', locale.code]"
+          [attr.lang]="locale.htmlLang"
+          [attr.hreflang]="locale.hreflang"
+        >
+          {{ locale.name }}
+        </a>
+      </li>
+    }
+  </ul>
+</main>

@@ -1,0 +1,22 @@
+a {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-text-on-primary);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+
+  // Off-screen (not display:none) until focused, so it stays in the tab order.
+  &:not(:focus) {
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0;
+  }
+}

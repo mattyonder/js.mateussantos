@@ -1,0 +1,10 @@
+<main class="container notfound">
+  <h1>404</h1>
+  @for (entry of entries; track entry.info.code) {
+    <section [attr.lang]="entry.info.htmlLang">
+      <h2>{{ entry.text.title }}</h2>
+      <p>{{ entry.text.message }}</p>
+      <a [routerLink]="['/', entry.info.code]">{{ entry.text.backLabel }}</a>
+    </section>
+  }
+</main>
