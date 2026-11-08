@@ -7,6 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { I18nService } from '../../core/i18n/i18n.service';
+import { AccentText } from '../accent-text/accent-text';
 import { Reveal } from '../reveal/reveal';
 
 /**
@@ -23,7 +24,7 @@ import { Reveal } from '../reveal/reveal';
  */
 @Component({
   selector: 'app-section',
-  imports: [Reveal],
+  imports: [Reveal, AccentText],
   templateUrl: './section.html',
   styleUrl: './section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +34,8 @@ export class Section {
 
   readonly sectionId = input.required<string>();
   readonly heading = input.required<string>();
+  /** Word or phrase INSIDE `heading` shown in the accent italic (visual only). */
+  readonly accent = input<string>();
   /** Optional override of the small label above the heading. */
   readonly eyebrow = input<string>();
   /** Tinted background, used to alternate sections and give the page rhythm. */

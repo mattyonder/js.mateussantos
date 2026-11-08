@@ -71,3 +71,18 @@ $latin-range:
   descent-override: 22.05%;
   line-gap-override: 0%;
 }
+
+// ---- Accent italic (one emphasised word per heading, plus part of the name) ----
+// DM Serif Display Italic (SIL OFL-1.1), latin subset, ~24 KB.
+// `font-display: optional`: the browser uses it only if it is ready within a very short window
+// (it is preloaded) and otherwise keeps the system serif italic for that page view. It NEVER
+// swaps in later, so it cannot cause a layout shift, which a decorative font must not do.
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: italic;
+  font-display: optional;
+  font-weight: 400;
+  src: url('../../node_modules/@fontsource/dm-serif-display/files/dm-serif-display-latin-400-italic.woff2')
+    format('woff2');
+  unicode-range: $latin-range;
+}

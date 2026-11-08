@@ -1,0 +1,14 @@
+:host {
+  display: inline;
+}
+
+// A serif italic is optically smaller and lighter than the bold sans around it: 1.04em and
+// regular weight balance them. Colour is --color-link (contrast checked on every background).
+.accent {
+  color: var(--color-link);
+  font-family: var(--font-accent);
+  font-size: 1.04em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}

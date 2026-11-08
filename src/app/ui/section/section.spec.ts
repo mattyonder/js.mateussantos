@@ -8,7 +8,13 @@ import { Section } from './section';
 @Component({
   imports: [Section],
   template: `
-    <app-section [sectionId]="id()" heading="About me" [eyebrow]="eyebrow()" [subtle]="subtle()">
+    <app-section
+      [sectionId]="id()"
+      heading="About me"
+      [eyebrow]="eyebrow()"
+      [subtle]="subtle()"
+      [accent]="accent()"
+    >
       <p id="content">Body</p>
     </app-section>
   `,
@@ -17,6 +23,7 @@ class Host {
   readonly id = signal('about');
   readonly eyebrow = signal<string | undefined>(undefined);
   readonly subtle = signal(false);
+  readonly accent = signal<string | undefined>(undefined);
 }
 
 describe('Section', () => {
@@ -54,6 +61,25 @@ describe('Section', () => {
     expect(el.querySelector('section')?.classList.contains('subtle')).toBe(false);
     update((host) => host.subtle.set(true));
     expect(el.querySelector('section')?.classList.contains('subtle')).toBe(true);
+  });
+
+  describe('accent word in the heading', () => {
+    it('renders the accent as a visual span and keeps the h2 text identical', () => {
+      const { el } = setup();
+      const heading = el.querySelector('h2') as HTMLElement;
+      expect(heading.textContent).toBe('About me');
+      expect(heading.querySelector('.accent')).toBeNull(); // no accent given by default
+    });
+
+    it('wraps the given accent and leaves the accessible name unchanged', () => {
+      const { fixture, el } = setup();
+      fixture.componentInstance.accent.set('me');
+      fixture.detectChanges();
+      const heading = el.querySelector('h2') as HTMLElement;
+      expect(heading.querySelector('.accent')?.textContent).toBe('me');
+      expect(heading.textContent).toBe('About me');
+      expect(el.querySelector('section')?.getAttribute('aria-labelledby')).toBe(heading.id);
+    });
   });
 
   describe('numbered header ("01 ── Profile")', () => {

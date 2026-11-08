@@ -10,7 +10,7 @@
           <span class="label">{{ text }}</span>
         </p>
       }
-      <h2 [id]="headingId()">{{ heading() }}</h2>
+      <h2 [id]="headingId()"><app-accent-text [text]="heading()" [accent]="accent()" /></h2>
     </header>
     <div class="body">
       <ng-content />
