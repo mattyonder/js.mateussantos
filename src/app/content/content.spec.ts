@@ -27,14 +27,31 @@ function strings(value: unknown): string[] {
 describe('site content', () => {
   const entries = LOCALES.map((locale) => [locale, CONTENT[locale]] as const);
 
-  it('has the same structure in PT and EN', () => {
-    // The EN résumé (kept as written by the owner) lists RxJS under technical
-    // skills and PT does not, so item counts inside skills are not compared.
-    const comparable = (content: SiteContent) =>
-      shape(content).filter((entry) => !/^\.skills\.groups\[\d+\]\.items/.test(entry));
-
-    expect(comparable(CONTENT.en)).toEqual(comparable(CONTENT.pt));
+  it('has the same structure in PT and EN (including the number of skills per group)', () => {
+    const structure = (content: SiteContent) => shape(content);
+    expect(structure(CONTENT.en)).toEqual(structure(CONTENT.pt));
   });
+
+  it.each(entries)(
+    '%s: technical skills match the résumés, including Tailwind CSS',
+    (_l, content) => {
+      const technical = content.skills.groups.find((g) => g.id === 'technical');
+      expect([...(technical?.items ?? [])]).toEqual([
+        'Angular',
+        'TypeScript',
+        'JavaScript',
+        'RxJS',
+        'Nx',
+        'Tailwind CSS',
+        'Jest',
+        'SASS',
+        'Java',
+        'Spring Boot',
+        'PostgreSQL',
+        'SQL',
+      ]);
+    },
+  );
 
   it.each(entries)('%s: has no empty strings', (_locale, content) => {
     for (const text of strings(content)) {

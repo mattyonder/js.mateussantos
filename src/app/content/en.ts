@@ -5,8 +5,9 @@ import type { SiteContent } from './types';
  * EN content. Source of truth: the owner's own English résumé
  * (`public/curriculo_mateus_de_jesus_santos_en.pdf`). Deliberately NOT
  * re-translated from PT: the owner chose to keep the EN résumé wording.
- * Known differences from PT (also from that résumé): "RxJS" is listed under
- * technical skills, and the summary is shorter.
+ * The résumé was updated by the owner on 2026-11-08; both PDFs now carry the same
+ * skills and the same experience, and every résumé sentence here is checked
+ * literally against the PDF text.
  */
 export const EN: SiteContent = {
   meta: {
@@ -43,7 +44,7 @@ export const EN: SiteContent = {
   about: {
     heading: 'About',
     summary:
-      "Mid-level Full Stack Developer with a Bachelor's degree in Information Systems, specialized in Front-end development with Angular and TypeScript, and hands-on experience in Back-end development with Java and Spring Boot. Solid track record building and maintaining web applications for public healthcare management. Experienced in mentoring developers, defining coding standards, and participating in the full development lifecycle, from prototyping to production deployment. Combines technical rigor, clean code practices, and strong team collaboration to deliver high-impact solutions.",
+      "Mid-Level Full Stack Developer with a Bachelor's degree in Information Systems, specialized in Front-end development with Angular and TypeScript, and complementary Back-end experience with Java and Spring Boot. Established track record developing and maintaining web systems for public healthcare management, focused on scalable components, complex state management, and RESTful API integration. Experienced in technical mentoring of developers, defining coding standards, and taking part in the entire development lifecycle, from prototype to production deployment. Combines technical rigor, clean code, and constant team collaboration to deliver high-impact solutions.",
   },
   experience: {
     heading: 'Experience',
@@ -70,8 +71,8 @@ export const EN: SiteContent = {
           'Led front-end development of the SISPEC system, defining development standards, structuring PR validation checklists, and mentoring interns and new developers on business rules and best practices with Angular, RxJS, and SASS.',
           "Developed most of the interfaces for the Almoxarifado (Inventory Management) system and served as the sole front-end developer for IPE Saúde's medical priority panel, focusing on modularization and reusable components.",
           'Built secure RESTful APIs in Java and Spring Boot and resolved critical bugs for the Almoxarifado and SISPEC projects, maintaining clean code standards.',
-          'Implemented critical user identification features in the Regulação (Regulation) system under tight deadlines, and developed SQL scripts (PostgreSQL) for data correction directly in production environments.',
-          'Actively participated in delivery pipelines, with frequent deployments to staging and production environments.',
+          "In the Regulação (Regulation) system, adjusted the API services and developed the unification script, applied in production, for Patient and Provider records sharing the same CPF (Brazilian taxpayer ID) or CNS (National Health Card number), under tight deadlines; also developed front-end screens for APAC (Outpatient Procedure Authorization within Brazil's public health system, SUS).",
+          'Participated in delivery pipelines, with frequent deployments to staging and production.',
         ],
       },
     ],
@@ -105,7 +106,7 @@ export const EN: SiteContent = {
         {
           id: 'regulacao',
           name: 'Regulação (Regulation)',
-          role: 'Implemented critical user identification features under tight deadlines; wrote SQL data-correction scripts.',
+          role: 'API service adjustments, a record-unification script applied in production, and front-end screens for APAC.',
           stack: WORKED_STACK,
         },
       ],
@@ -128,7 +129,8 @@ export const EN: SiteContent = {
           'TypeScript',
           'JavaScript',
           'RxJS',
-          'Nx (Monorepo)',
+          'Nx',
+          'Tailwind CSS',
           'Jest',
           'SASS',
           'Java',
