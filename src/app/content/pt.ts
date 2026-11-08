@@ -27,6 +27,7 @@ export const PT: SiteContent = {
   ],
   hero: {
     name: 'Mateus de Jesus Santos',
+    nameAccent: 'de Jesus',
     role: 'Desenvolvedor Full Stack Pleno | Front-end Angular',
     tagline: 'Front-end com Angular e TypeScript, com experiência em back-end Java e Spring Boot.',
     location: 'Sergipe, Brasil',
@@ -36,8 +37,18 @@ export const PT: SiteContent = {
     profilesLabel: 'Perfis profissionais',
     stackLabel: 'Principais tecnologias',
   },
+  stats: {
+    label: 'Resumo em números',
+    items: [
+      { id: 'systems', caption: 'sistemas de saúde pública em que atuei' },
+      { id: 'roles', caption: 'cargos na mesma empresa, de Júnior a Pleno' },
+      { id: 'technologies', caption: 'tecnologias nas habilidades técnicas' },
+      { id: 'languages', caption: 'idiomas: português, inglês e espanhol' },
+    ],
+  },
   about: {
-    heading: 'Sobre',
+    heading: 'Sobre mim',
+    headingAccent: 'mim',
     summary:
       'Desenvolvedor Full Stack Pleno com Bacharelado em Sistemas de Informação, especializado em Front-end com Angular e TypeScript, e experiência complementar em Back-end com Java e Spring Boot. Atuação consolidada no desenvolvimento e manutenção de sistemas web para gestão pública na área da saúde, com foco em componentes escaláveis, gerenciamento de estado complexo e integração com APIs RESTful. Experiência em orientação técnica de desenvolvedores, definição de padrões de código e participação em todo o ciclo de desenvolvimento, do protótipo ao deploy em produção. Combina rigor técnico, código limpo e colaboração constante em equipe para entregar soluções de alto impacto.',
     highlights: [
@@ -61,13 +72,16 @@ export const PT: SiteContent = {
   },
 
   experience: {
-    heading: 'Experiência',
+    stackLabel: 'Tecnologias deste cargo',
+    heading: 'Experiência profissional',
+    headingAccent: 'profissional',
     positions: [
       {
         role: 'Desenvolvedor Full Stack Pleno',
         company: 'MMS Soluções e Consultoria',
         period: 'Junho/2026 – Atual',
         current: true,
+        stack: SISPEC_STACK,
         highlights: [
           'Evoluo a arquitetura do monorepo Nx do sistema SISPEC, tendo criado o módulo de Urgência e Emergência e refatorado a lib compartilhada entre módulos, além de estabelecer padrões de código e checklists de validação técnica para Pull Requests.',
           'Atuo como referência técnica da equipe, orientando desenvolvedores em regras de negócio do domínio de saúde pública, revisão crítica de código e destravamento de tarefas complexas.',
@@ -81,6 +95,7 @@ export const PT: SiteContent = {
         company: 'MMS Soluções e Consultoria',
         period: 'Novembro/2024 – Junho/2026',
         current: false,
+        stack: WORKED_STACK,
         highlights: [
           'Liderei o desenvolvimento front-end do sistema SISPEC, definindo padrões de desenvolvimento, estruturando checklists de validação para Pull Requests e orientando estagiários e novos desenvolvedores em regras de negócio e boas práticas com Angular, RxJS e SASS.',
           'Desenvolvi a maior parte das interfaces do sistema de Almoxarifado e atuei como único desenvolvedor front-end do painel médico de prioridades do IPE Saúde, com foco em modularização e componentes reutilizáveis.',
@@ -92,7 +107,8 @@ export const PT: SiteContent = {
     ],
   },
   projects: {
-    heading: 'Projetos',
+    heading: 'Projetos e sistemas',
+    headingAccent: 'sistemas',
     worked: {
       heading: 'Sistemas em que atuei',
       note: 'Sistemas governamentais de saúde pública: por isso, não exibo telas, dados nem detalhes internos.',
@@ -133,7 +149,8 @@ export const PT: SiteContent = {
     },
   },
   skills: {
-    heading: 'Habilidades',
+    heading: 'Habilidades técnicas',
+    headingAccent: 'técnicas',
     groups: [
       {
         id: 'technical',
@@ -182,6 +199,7 @@ export const PT: SiteContent = {
   },
   education: {
     heading: 'Formação e idiomas',
+    headingAccent: 'idiomas',
     degreesHeading: 'Formação acadêmica',
     degrees: [
       {
@@ -203,7 +221,8 @@ export const PT: SiteContent = {
     ],
   },
   contact: {
-    heading: 'Contato',
+    heading: 'Vamos conversar',
+    headingAccent: 'conversar',
     intro:
       'Conversas sobre oportunidades em desenvolvimento de software com Angular, TypeScript, Java ou Spring Boot são bem-vindas.',
     emailLabel: 'E-mail',

@@ -30,6 +30,8 @@ export interface Highlight {
 }
 
 export interface Position {
+  /** Technologies of this role (language-independent, from content/profile.ts). */
+  readonly stack: readonly string[];
   readonly role: string;
   readonly company: string;
   readonly period: string;
@@ -80,6 +82,14 @@ export interface PublishedProject {
 
 export type PersonalProject = ComingSoonProject | PublishedProject;
 
+/** Which count a stat shows. The NUMBER is always computed from the content, never typed. */
+export type StatId = 'systems' | 'roles' | 'technologies' | 'languages';
+
+export interface StatItem {
+  readonly id: StatId;
+  readonly caption: string;
+}
+
 export interface SiteContent {
   readonly meta: PageMeta;
   readonly a11y: {
@@ -94,6 +104,8 @@ export interface SiteContent {
   readonly nav: readonly NavItem[];
   readonly hero: {
     readonly name: string;
+    /** Part of `name` set in the accent italic. */
+    readonly nameAccent: string;
     readonly role: string;
     readonly tagline: string;
     readonly location: string;
@@ -104,17 +116,30 @@ export interface SiteContent {
     /** Accessible name of the technology chips under the tagline. */
     readonly stackLabel: string;
   };
+  /** "At a glance" strip under the hero. Only counts derived from the lists below. */
+  readonly stats: {
+    readonly label: string;
+    readonly items: readonly StatItem[];
+  };
   readonly about: {
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     readonly summary: string;
     readonly highlights: readonly Highlight[];
   };
   readonly experience: {
+    /** Accessible name of the technology chips of each role. */
+    readonly stackLabel: string;
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     readonly positions: readonly Position[];
   };
   readonly projects: {
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     readonly worked: {
       readonly heading: string;
       readonly note: string;
@@ -131,10 +156,14 @@ export interface SiteContent {
   };
   readonly skills: {
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     readonly groups: readonly SkillGroup[];
   };
   readonly education: {
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     readonly degreesHeading: string;
     readonly degrees: readonly Degree[];
     readonly languagesHeading: string;
@@ -142,6 +171,8 @@ export interface SiteContent {
   };
   readonly contact: {
     readonly heading: string;
+    /** One word or phrase INSIDE `heading` that is set in the accent italic. */
+    readonly headingAccent: string;
     /** Professional statement of availability for conversations (owner's decision, Contact only). */
     readonly intro: string;
     readonly emailLabel: string;

@@ -34,6 +34,7 @@ export const EN: SiteContent = {
   ],
   hero: {
     name: 'Mateus de Jesus Santos',
+    nameAccent: 'de Jesus',
     role: 'Mid-Level Full Stack Developer | Front-end Angular Specialist',
     tagline:
       'Front-end developer with Angular and TypeScript, with back-end experience in Java and Spring Boot.',
@@ -44,8 +45,18 @@ export const EN: SiteContent = {
     profilesLabel: 'Professional profiles',
     stackLabel: 'Main technologies',
   },
+  stats: {
+    label: 'Summary in numbers',
+    items: [
+      { id: 'systems', caption: 'public health systems I worked on' },
+      { id: 'roles', caption: 'roles at the same company, from Junior to Mid-Level' },
+      { id: 'technologies', caption: 'technologies in the technical skills' },
+      { id: 'languages', caption: 'languages: Portuguese, English and Spanish' },
+    ],
+  },
   about: {
-    heading: 'About',
+    heading: 'About me',
+    headingAccent: 'me',
     summary:
       "Mid-Level Full Stack Developer with a Bachelor's degree in Information Systems, specialized in Front-end development with Angular and TypeScript, and complementary Back-end experience with Java and Spring Boot. Established track record developing and maintaining web systems for public healthcare management, focused on scalable components, complex state management, and RESTful API integration. Experienced in technical mentoring of developers, defining coding standards, and taking part in the entire development lifecycle, from prototype to production deployment. Combines technical rigor, clean code, and constant team collaboration to deliver high-impact solutions.",
     highlights: [
@@ -69,13 +80,16 @@ export const EN: SiteContent = {
   },
 
   experience: {
-    heading: 'Experience',
+    stackLabel: 'Technologies in this role',
+    heading: 'Professional experience',
+    headingAccent: 'experience',
     positions: [
       {
         role: 'Mid-Level Full Stack Developer',
         company: 'MMS Soluções e Consultoria',
         period: 'June 2026 – Present',
         current: true,
+        stack: SISPEC_STACK,
         highlights: [
           'Evolve the architecture of the SISPEC Nx monorepo, having created the Emergency and Urgent Care module and refactored the library shared across modules, while establishing coding standards and technical validation checklists for Pull Requests.',
           "Serve as the team's technical reference, guiding developers on healthcare domain business rules, critical code review, and unblocking complex tasks.",
@@ -89,6 +103,7 @@ export const EN: SiteContent = {
         company: 'MMS Soluções e Consultoria',
         period: 'November 2024 – June 2026',
         current: false,
+        stack: WORKED_STACK,
         highlights: [
           'Led front-end development of the SISPEC system, defining development standards, structuring PR validation checklists, and mentoring interns and new developers on business rules and best practices with Angular, RxJS, and SASS.',
           "Developed most of the interfaces for the Almoxarifado (Inventory Management) system and served as the sole front-end developer for IPE Saúde's medical priority panel, focusing on modularization and reusable components.",
@@ -100,7 +115,8 @@ export const EN: SiteContent = {
     ],
   },
   projects: {
-    heading: 'Projects',
+    heading: 'Projects and systems',
+    headingAccent: 'systems',
     worked: {
       heading: 'Systems I worked on',
       note: 'Government public healthcare systems: for that reason, I do not show screens, data or internal details.',
@@ -141,7 +157,8 @@ export const EN: SiteContent = {
     },
   },
   skills: {
-    heading: 'Skills',
+    heading: 'Technical skills',
+    headingAccent: 'skills',
     groups: [
       {
         id: 'technical',
@@ -190,6 +207,7 @@ export const EN: SiteContent = {
   },
   education: {
     heading: 'Education and languages',
+    headingAccent: 'languages',
     degreesHeading: 'Education',
     degrees: [
       {
@@ -211,7 +229,8 @@ export const EN: SiteContent = {
     ],
   },
   contact: {
-    heading: 'Contact',
+    heading: "Let's talk",
+    headingAccent: 'talk',
     intro:
       'Conversations about software development opportunities with Angular, TypeScript, Java or Spring Boot are welcome.',
     emailLabel: 'Email',

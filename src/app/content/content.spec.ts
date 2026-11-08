@@ -1,6 +1,6 @@
 import { LOCALES } from '../core/i18n/locales';
 import { CONTENT } from './index';
-import { HERO_STACK, PROFILE, RESUME_PATH } from './profile';
+import { HERO_STACK, PROFILE, RESUME_PATH, SISPEC_STACK, WORKED_STACK } from './profile';
 import type { SiteContent } from './types';
 
 /** Flattens a value into a list of `path:type` / `path[]:length` entries describing its shape. */
@@ -203,6 +203,50 @@ describe('site content', () => {
 
     it.each(entries)('%s: hero name matches the profile name', (_locale, content) => {
       expect(content.hero.name).toBe(PROFILE.name);
+    });
+  });
+
+  describe('accent italic (items 8, 9 and 10)', () => {
+    it.each(entries)('%s: every heading accent is a word INSIDE its heading', (_l, content) => {
+      const pairs: [string, string][] = [
+        [content.hero.name, content.hero.nameAccent],
+        [content.about.heading, content.about.headingAccent],
+        [content.experience.heading, content.experience.headingAccent],
+        [content.projects.heading, content.projects.headingAccent],
+        [content.skills.heading, content.skills.headingAccent],
+        [content.education.heading, content.education.headingAccent],
+        [content.contact.heading, content.contact.headingAccent],
+      ];
+      for (const [text, accent] of pairs) {
+        expect(accent.length, text).toBeGreaterThan(0);
+        expect(text, `"${accent}" in "${text}"`).toContain(accent);
+        expect(accent, text).not.toBe(text); // a whole heading in italic is not an accent
+      }
+    });
+
+    it.each(entries)('%s: the accent in the name is part of the real name', (_l, content) => {
+      expect(PROFILE.name).toContain(content.hero.nameAccent);
+    });
+
+    it.each(entries)(
+      '%s: the stack of each role matches what the owner confirmed',
+      (_l, content) => {
+        const [current, previous] = content.experience.positions;
+        // Jest was introduced in the current role (SISPEC); the earlier role did not use it.
+        expect([...current.stack]).toEqual([...SISPEC_STACK]);
+        expect([...previous.stack]).toEqual([...WORKED_STACK]);
+        expect(current.stack).toContain('Jest');
+        expect(previous.stack).not.toContain('Jest');
+      },
+    );
+
+    it.each(entries)('%s: the stats list the four counts, once each', (_l, content) => {
+      expect(content.stats.items.map((item) => item.id)).toEqual([
+        'systems',
+        'roles',
+        'technologies',
+        'languages',
+      ]);
     });
   });
 });
