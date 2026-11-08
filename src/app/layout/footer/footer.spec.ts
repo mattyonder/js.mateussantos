@@ -22,4 +22,16 @@ describe.each(LOCALES)('Footer (%s)', (locale) => {
   it('states the licence', () => {
     expect(root(render(Footer, locale)).textContent).toContain(CONTENT[locale].footer.license);
   });
+
+  it('has a "back to top" link to the main landmark of THIS language, as a router link', () => {
+    const link = root(render(Footer, locale)).querySelector<HTMLAnchorElement>('a.top');
+    expect(link?.textContent?.trim()).toBe(CONTENT[locale].footer.backToTop);
+    // routerLink + fragment, not a bare "#main": that would resolve against <base href="/">.
+    expect(link?.getAttribute('href')).toBe(`/${locale}#main`);
+  });
+
+  it('keeps the source-code link as the first link of the footer', () => {
+    const first = root(render(Footer, locale)).querySelector('a') as HTMLAnchorElement;
+    expect(first.getAttribute('href')).toBe(PROFILE.repositoryUrl);
+  });
 });

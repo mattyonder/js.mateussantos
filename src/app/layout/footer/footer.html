@@ -8,6 +8,13 @@
         </a>
       </li>
       <li>{{ footer().license }}</li>
+      <li>
+        <!-- routerLink + fragment (not href="#main"): a bare #id would resolve against <base href="/"> -->
+        <a class="top" [routerLink]="['/', locale()]" fragment="main">
+          <app-icon name="arrow-up" />
+          {{ footer().backToTop }}
+        </a>
+      </li>
     </ul>
   </div>
 </footer>

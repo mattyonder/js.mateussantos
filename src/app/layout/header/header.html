@@ -6,9 +6,13 @@
       <ul>
         @for (item of nav(); track item.id) {
           <li>
-            <a [routerLink]="['/', locale()]" [fragment]="item.id" (click)="close()">{{
-              item.label
-            }}</a>
+            <a
+              [routerLink]="['/', locale()]"
+              [fragment]="item.id"
+              [attr.aria-current]="activeId() === item.id ? 'true' : null"
+              (click)="select(item.id)"
+              >{{ item.label }}</a
+            >
           </li>
         }
       </ul>
